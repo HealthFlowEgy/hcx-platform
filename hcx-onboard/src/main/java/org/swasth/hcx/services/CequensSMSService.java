@@ -153,7 +153,7 @@ public class CequensSMSService {
     }
 
     /**
-     * Format phone number for Cequens API
+     * Format phone number for Cequens API (Egyptian format)
      * @param phoneNumber Raw phone number
      * @return Formatted phone number
      */
@@ -161,13 +161,18 @@ public class CequensSMSService {
         // Remove all non-digit characters
         String cleaned = phoneNumber.replaceAll("[^0-9]", "");
         
-        // Add Egypt country code if not present
-        if (!cleaned.startsWith("20") && cleaned.length() == 11 && cleaned.startsWith("01")) {
-            cleaned = "20" + cleaned;
-        }
-        
-        // Ensure it starts with + for international format
-        if (!cleaned.startsWith("+")) {
+        // Handle Egyptian phone numbers
+        if (cleaned.startsWith("20")) {
+            // Already has country code
+            cleaned = "+" + cleaned;
+        } else if (cleaned.startsWith("0")) {
+            // Remove leading zero and add Egyptian country code
+            cleaned = "+20" + cleaned.substring(1);
+        } else if (cleaned.length() == 10 || cleaned.length() == 11) {
+            // Local Egyptian number, add country code
+            cleaned = "+20" + cleaned;
+        } else if (!cleaned.startsWith("+")) {
+            // Ensure + prefix for international format
             cleaned = "+" + cleaned;
         }
         

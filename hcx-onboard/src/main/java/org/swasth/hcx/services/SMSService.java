@@ -29,7 +29,7 @@ public class SMSService {
     @Async
     public CompletableFuture<String> sendOTP(String phone, String phoneOtp) {
         String message = "HCX mobile verification code is:" +phoneOtp;
-        String phoneNumber = "+91"+ phone;  // Ex: +91XXX4374XX
+        String phoneNumber = "+20"+ phone;  // Ex: +20XXXXXXXXX (Egyptian format)
         AmazonSNS snsClient = AmazonSNSClient.builder().withCredentials(new AWSCredentialsProvider() {
             @Override
             public AWSCredentials getCredentials() {
