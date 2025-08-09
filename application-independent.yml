@@ -1,0 +1,91 @@
+# HCX Platform Independent Configuration
+# This configuration eliminates all third-party dependencies
+
+server:
+  port: ${SERVER_PORT:8080}
+
+# Local Registry Configuration (replaces external AWS ELB)
+registry:
+  basePath: ${REGISTRY_BASE_PATH:http://localhost:8080}
+  hcxcode: ${REGISTRY_HCX_CODE:1-d2d56996-1b77-4abb-b9e9-0e6e7343c72e}
+  apiPath: ${REGISTRY_API_PATH:/api/v1/participant/}
+
+# Cequens SMS Configuration (replaces AWS SNS)
+cequens:
+  api:
+    url: ${CEQUENS_API_URL:https://apis.cequens.com}
+    version: ${CEQUENS_API_VERSION:v1}
+  access:
+    token: ${CEQUENS_ACCESS_TOKEN}
+  sender:
+    name: ${CEQUENS_SENDER_NAME:HCX}
+
+# Local File Storage Configuration (replaces AWS S3)
+local:
+  storage:
+    base:
+      path: ${LOCAL_STORAGE_PATH:/var/hcx/storage}
+    public:
+      url: ${LOCAL_STORAGE_PUBLIC_URL:http://localhost:8080/files}
+    max:
+      file:
+        size: ${LOCAL_STORAGE_MAX_FILE_SIZE:10485760}
+
+# PostgreSQL Configuration
+postgres:
+  url: ${POSTGRES_URL:jdbc:postgresql://localhost:5432/hcx}
+  user: ${POSTGRES_USER:hcx_user}
+  password: ${POSTGRES_PASSWORD:hcx_password}
+  tablename: ${POSTGRES_TABLENAME:payload}
+  onboardingTable: ${ONBOARDING_TABLE:onboarding}
+  onboardingOtpTable: ${ONBOARDING_OTP_TABLE:onboarding_otp}
+
+# Kafka Configuration
+kafka:
+  bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+  topic:
+    payload: ${KAFKA_PAYLOAD_TOPIC:hcx.request.payload}
+    coverageeligibility: ${KAFKA_COVERAGE_TOPIC:hcx.request.coverageeligibility}
+    preauth: ${KAFKA_PREAUTH_TOPIC:hcx.request.preauth}
+    claim: ${KAFKA_CLAIM_TOPIC:hcx.request.claim}
+    payment: ${KAFKA_PAYMENT_TOPIC:hcx.request.payment}
+    status: ${KAFKA_STATUS_TOPIC:hcx.request.status.search}
+    search: ${KAFKA_SEARCH_TOPIC:hcx.request.search}
+    communication: ${KAFKA_COMMUNICATION_TOPIC:hcx.request.communication}
+    notification: ${KAFKA_NOTIFICATION_TOPIC:hcx.request.notification}
+    subscription: ${KAFKA_SUBSCRIPTION_TOPIC:hcx.request.subscription}
+    audit: ${KAFKA_AUDIT_TOPIC:hcx.audit}
+
+# Redis Configuration
+redis:
+  host: ${REDIS_HOST:localhost}
+  port: ${REDIS_PORT:6379}
+  password: ${REDIS_PASSWORD:}
+  database: ${REDIS_DATABASE:0}
+
+# Security Configuration
+security:
+  jwt:
+    secret: ${JWT_SECRET:your_jwt_secret_key}
+    expiration: ${JWT_EXPIRATION:86400}
+  encryption:
+    key: ${ENCRYPTION_KEY:your_encryption_key}
+
+# Logging Configuration
+logging:
+  level:
+    org.swasth: ${LOG_LEVEL:INFO}
+    org.springframework: WARN
+  file:
+    name: ${LOG_FILE:/var/log/hcx/application.log}
+
+# Monitoring Configuration
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,metrics,info
+  endpoint:
+    health:
+      show-details: always
+
