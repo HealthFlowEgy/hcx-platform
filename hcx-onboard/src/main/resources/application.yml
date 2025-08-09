@@ -1,0 +1,62 @@
+server:
+  port: ${SERVER_PORT:8082}
+
+logging:
+  level:
+    root: ${LOGGING_LEVEL_ROOT:INFO}
+
+env: ${ENV:local}
+
+#elasticsearch config
+es:
+  host: ${es_host:localhost}
+  port: ${es_port:9200}
+
+#Audit config
+audit:
+  index: ${audit_index:hcx_audit}
+  alias: ${audit_alias:hcx_audit}
+
+aws:
+  accessKey: ${aws_accessKey:}
+  accessSecret: ${aws_accessSecret:}
+  region: ${aws_region:}
+
+onboarding:
+  successURL: ${onboarding_success_url:}
+
+email:
+  id: ${email_id:test@gmail.com}
+  pwd: ${email_pwd:test@123}
+  otpSub: ${otp_sub:HCX - Onboarding Started}
+  otpMsg: ${otp_msg:Hi USER_NAME,<br/><br/>Your participant code is PARTICIPANT_CODE.<br/>Use the following OTP to verify your email address:RANDOM_CODE <br/><br/> Thanks,<br/> HCX Team}
+  successIdentitySub: ${success_identity_sub:HCX - Identity Verified}
+  successIdentityMsg: ${success_identity_msg:Hi User,<br/><br/>Identity verification is successful.<br/><br/>Thanks,<br/> HCX Team}
+  failedIdentitySub: ${failed_identity_sub:HCX - Identity Verification Failed}
+  failedIdentityMsg: ${failed_identity_msg:Hi User,<br/><br/>Identity verification is failed. Please reach out to HCX Team.<br/><br/>Thanks,<br/> HCX Team}
+  onboardingSuccessSub: ${onboarding_success_sub:HCX - Onboarding Successful}
+  onboardingSuccessMsg: ${onboarding_success_msg:Hi USER_NAME,<br/><br/>Your onboarding is successful, Welcome to HCX.<br/>Please refer to the <a href="${onboarding.successURL}">link</a> for protocol details and integration specifications.<br/>Thanks,<br/> HCX Team}
+
+hcx-api:
+  basePath: ${HCX_API_BASEPATH:http://localhost:8080}
+
+#postgres config
+postgres:
+  url: ${postgres_url:jdbc:postgresql://localhost:5432/postgres}
+  user: ${postgres_user:postgres}
+  password: ${postgres_password:postgres}
+  onboardingOtpTable: ${onboarding_otp_table:onboarding_otp}
+  onboardingTable: ${onboarding_table:onboarding}
+
+
+otp:
+  expiry: ${otp_expiry:600000}
+  maxAttempt: ${otp_max_attempt:3}
+  maxRegenerate: ${otp_max_regenerate:5}
+
+registry:
+  hcxCode: ${registry_hcx_code:1-d2d56996-1b77-4abb-b9e9-0e6e7343c72e}
+
+jwt-token:
+  privateKey : ${private_key:test-private-key}
+  expiryTime : ${expiry_time:86400000}

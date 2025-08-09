@@ -1,0 +1,134 @@
+version: '3.8'
+
+services:
+  # Database Services
+  postgres:
+    image: postgres:13
+    container_name: hcx-postgres
+    environment:
+      POSTGRES_DB: hcx
+      POSTGRES_USER: hcx_user
+      POSTGRES_PASSWORD: hcx_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./scripts/init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+    networks:
+      - hcx-network
+
+  # Message Queue Services
+  zookeeper:
+    image: wurstmeister/zookeeper:latest
+    container_name: hcx-zookeeper
+    ports:
+      - "2181:2181"
+    environment:
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://127.0.0.1:2181
+    networks:
+      - hcx-network
+
+  kafka:
+    image: wurstmeister/kafka:latest
+    container_name: hcx-kafka
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ADVERTISED_HOST_NAME: 127.0.0.1
+      KAFKA_LISTENERS: PLAINTEXT://:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://127.0.0.1:9092
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      ALLOW_PLAINTEXT_LISTENER: yes
+    depends_on:
+      - zookeeper
+    networks:
+      - hcx-network
+
+  # Cache Service
+  redis:
+    image: redis:6-alpine
+    container_name: hcx-redis
+    ports:
+      - "6379:6379"
+    networks:
+      - hcx-network
+
+  # HCX Core Services
+  hcx-apis:
+    build:
+      context: ./hcx-apis
+      dockerfile: Dockerfile
+    container_name: hcx-apis
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_NAME=hcx
+      - DB_USER=hcx_user
+      - DB_PASSWORD=hcx_password
+      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    depends_on:
+      - postgres
+      - kafka
+      - redis
+    networks:
+      - hcx-network
+
+  # API Gateway
+  api-gateway:
+    build:
+      context: ./api-gateway
+      dockerfile: Dockerfile
+    container_name: hcx-api-gateway
+    ports:
+      - "8090:8090"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - HCX_APIS_URL=http://hcx-apis:8080
+    depends_on:
+      - hcx-apis
+    networks:
+      - hcx-network
+
+  # Demo Application (Optional)
+  demo-app:
+    build:
+      context: ./demo-app
+      dockerfile: Dockerfile
+    container_name: hcx-demo-app
+    ports:
+      - "3000:3000"
+    environment:
+      - REACT_APP_API_URL=http://localhost:8090
+    depends_on:
+      - api-gateway
+    networks:
+      - hcx-network
+
+  # Onboarding Application
+  onboarding-app:
+    build:
+      context: ./onboarding-app
+      dockerfile: Dockerfile
+    container_name: hcx-onboarding-app
+    ports:
+      - "3001:3000"
+    environment:
+      - REACT_APP_API_URL=http://localhost:8090
+    depends_on:
+      - api-gateway
+    networks:
+      - hcx-network
+
+volumes:
+  postgres_data:
+
+networks:
+  hcx-network:
+    driver: bridge
+

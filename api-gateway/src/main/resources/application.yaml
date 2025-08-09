@@ -1,0 +1,170 @@
+logging:
+  level:
+    root: ${LOGGING_LEVEL_ROOT:INFO}
+
+server:
+  port: ${SERVER_PORT:8095}
+
+version:
+  external07: ${version_external_07:v0.7}
+  external08: ${version_external_08:v0.8}
+  internal: ${version_internal:v1}
+
+#hcx headers
+protocol:
+  headers:
+    mandatory: ${protocol_mandatory_headers:x-hcx-sender_code, x-hcx-recipient_code, x-hcx-api_call_id, x-hcx-timestamp, x-hcx-correlation_id}
+    optional: ${protocol_optional_headers:x-hcx-workflow_id, x-hcx-debug_flag, x-hcx-error_details, x-hcx-debug_details, x-hcx-status}
+headers:
+  jose: ${jose_headers:alg, enc}
+
+#rbac config
+rbac:
+  path: ${RBAC_PATH:classpath:rbac.yaml}
+
+#hcx error headers
+plainrequest:
+  headers:
+    mandatory: ${error_mandatory_headers:x-hcx-status, x-hcx-sender_code, x-hcx-recipient_code, x-hcx-error_details, x-hcx-correlation_id, x-hcx-api_call_id, x-hcx-timestamp}
+    optional: ${error_optional_headers:x-hcx-workflow_id}
+
+redirect:
+  apis: ${redirect_apis:/${version.internal}/coverageeligibility/on_check, /${version.internal}/preauth/on_submit, /${version.internal}/claim/on_submit}
+  roles: ${redirect_roles:payor, agency.tpa}
+  headers:
+    mandatory: ${redirect_mandatory_headers:x-hcx-sender_code, x-hcx-recipient_code, x-hcx-api_call_id, x-hcx-timestamp, x-hcx-correlation_id, x-hcx-status, x-hcx-redirect_to}
+    optional: ${redirect_optional_headers:x-hcx-workflow_id}
+
+notification:
+  subscription:
+    headers:
+      mandatory: ${notification_subscription_mandatory_headers:topic_code,sender_list}
+  networkPath: ${notification_networkPath:networkNotifications.yaml}
+  participantPath: ${notification_participantPath:participantNotifications.yaml}
+  workflowPath: ${notification_workflowPath:workflowNotifications.yaml}
+
+notify:
+  network:
+    allowedCodes: ${notify_network_allowedCodes:${registry.hcxCode}}
+
+timestamp:
+  range: ${timestamp_range:10000}
+
+allowedEntitiesForForward: ${allowed_entities_for_forward:coverageeligibility, preauth, claim}
+allowedRolesForForward: ${allowed_roles_for_forward:payor, agency.tpa}
+allowedParticipantStatus: ${allowed_participant_status:Active}
+
+jwt:
+  enabled: ${JWT_ENABLED:true}
+  issuer: ${JWT_ISSUER:}
+  audience: ${JWT_AUDIENCE:}
+  jwkUrl: ${JWT_JWK_URL:http://aef8101c432d04a659e6317b3e5031cf-1674586068.ap-south-1.elb.amazonaws.com:8080/auth/realms/swasth-health-claim-exchange/protocol/openid-connect/certs}
+  claimsNamespacePath: ${JWT_NS_PATH:$.realm_access.roles}
+
+redis:
+  host: ${REDIS_HOST:localhost}
+  port: ${REDIS_PORT:6379}
+  expires: ${REDIS_EXPIRES:3600}
+
+registry:
+  basePath: ${REGISTRY_BASE_PATH:http://a0b2bab079318431d8ca99f1efb1c25c-874274596.ap-south-1.elb.amazonaws.com:8081}
+  hcxCode: ${REGISTRY_HCX_CODE:1-d2d56996-1b77-4abb-b9e9-0e6e7343c72e}
+  hcxRoles: ${REGISTRY_HCX_ROLE:HIE/HIO.HCX}
+
+hcx-api:
+  basePath: ${HCX_API_BASEPATH:http://localhost:8080}
+
+hcx-onboard:
+  basePath: ${HCX_ONBOARD_BASEPATH:http://localhost:8082}
+
+#elasticsearch config
+es:
+  host: ${es_host:localhost}
+  port: ${es_port:9200}
+
+tag:
+   name : ${tag_name:}
+
+#audit config
+audit:
+  index: ${audit_index:hcx_audit}
+  alias: ${audit_alias:hcx_audit}
+
+spring:
+  main:
+    web-application-type: reactive
+    allow-bean-definition-overriding: true
+  cloud:
+    gateway:
+      routes:
+        - id: hcx-api-route
+          uri: ${hcx-api.basePath}
+          filters:
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: 10
+                redis-rate-limiter.burstCapacity: 20
+            - RewritePath=/${version.external07}/coverageeligibility/(?<segment>/?.*), /${version.internal}/coverageeligibility/$\{segment}
+            - RewritePath=/${version.external07}/preauth/(?<segment>/?.*), /${version.internal}/preauth/$\{segment}
+            - RewritePath=/${version.external07}/claim/(?<segment>/?.*), /${version.internal}/claim/$\{segment}
+            - RewritePath=/${version.external07}/paymentnotice/(?<segment>/?.*), /${version.internal}/paymentnotice/$\{segment}
+            - RewritePath=/${version.external07}/hcx/(?<segment>/?.*), /${version.internal}/hcx/$\{segment}
+            - RewritePath=/${version.external07}/predetermination/(?<segment>/?.*), /${version.internal}/predetermination/$\{segment}
+            - RewritePath=/${version.external07}/communication/(?<segment>/?.*), /${version.internal}/communication/$\{segment}
+            - RewritePath=/${version.external08}/coverageeligibility/(?<segment>/?.*), /${version.internal}/coverageeligibility/$\{segment}
+            - RewritePath=/${version.external08}/preauth/(?<segment>/?.*), /${version.internal}/preauth/$\{segment}
+            - RewritePath=/${version.external08}/claim/(?<segment>/?.*), /${version.internal}/claim/$\{segment}
+            - RewritePath=/${version.external08}/paymentnotice/(?<segment>/?.*), /${version.internal}/paymentnotice/$\{segment}
+            - RewritePath=/${version.external08}/hcx/(?<segment>/?.*), /${version.internal}/hcx/$\{segment}
+            - RewritePath=/${version.external08}/predetermination/(?<segment>/?.*), /${version.internal}/predetermination/$\{segment}
+            - RewritePath=/${version.external08}/communication/(?<segment>/?.*), /${version.internal}/communication/$\{segment}
+            - RewritePath=/${version.external08}/notification/subscribe, /${version.internal}/notification/subscribe
+            - RewritePath=/${version.external08}/notification/unsubscribe, /${version.internal}/notification/unsubscribe
+            - RewritePath=/${version.external08}/notification/notify, /${version.internal}/notification/notify
+            - RewritePath=/${version.external08}/notification/subscription/list, /${version.internal}/notification/subscription/list
+            - RewritePath=/${version.external08}/notification/on_subscribe, /${version.internal}/notification/on_subscribe
+            - RewritePath=/${version.external08}/notification/subscription/update, /${version.internal}/notification/subscription/update
+            - CachingRequestBodyFilter
+            - HCXValidationFilter
+          predicates:
+            - Path=/${version.external07}/coverageeligibility/**, /${version.external07}/preauth/**, /${version.external07}/claim/**, /${version.external07}/paymentnotice/**, /${version.external07}/hcx/**, /${version.external07}/predetermination/**, /${version.external07}/communication/**, /${version.external08}/coverageeligibility/**, /${version.external08}/preauth/**, /${version.external08}/claim/**, /${version.external08}/paymentnotice/**, /${version.external08}/hcx/**, /${version.external08}/predetermination/**, /${version.external08}/communication/**, /${version.external08}/notification/subscribe, /${version.external08}/notification/unsubscribe, /${version.external08}/notification/subscription/list, /${version.external08}/notification/notify, /${version.external08}/notification/subscription/update, /${version.external08}/notification/on_subscribe
+
+        - id: hcx-api-route-audit
+          uri: ${hcx-api.basePath}
+          filters:
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: 10
+                redis-rate-limiter.burstCapacity: 20
+            - RewritePath=/${version.external07}/audit/search, /${version.internal}/audit/search
+            - RewritePath=/${version.external08}/audit/search, /${version.internal}/audit/search
+            - RewritePath=/${version.external08}/audit/notification/search, /${version.internal}/audit/notification/search
+            - CachingRequestBodyFilter
+            - AuditValidationFilter
+          predicates:
+            - Path=/${version.external07}/audit/search, /${version.external08}/audit/search, /${version.external08}/audit/notification/search
+
+        - id: hcx-registry-api-route
+          uri: ${hcx-api.basePath}
+          filters:
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: 10
+                redis-rate-limiter.burstCapacity: 20
+            - RewritePath=/${version.external07}/participant/(?<segment>/?.*), /${version.internal}/participant/$\{segment}
+            - RewritePath=/${version.external08}/participant/(?<segment>/?.*), /${version.internal}/participant/$\{segment}
+            - RewritePath=/${version.external08}/notification/topic/list, /${version.internal}/notification/topic/list
+          predicates:
+            - Path=/${version.external07}/participant/create, /${version.external07}/participant/update, /${version.external07}/participant/search*, /${version.external07}/participant/read/*, /${version.external07}/participant/delete, /${version.external08}/participant/create, /${version.external08}/participant/update, /${version.external08}/participant/search* , /${version.external08}/participant/read/*, /${version.external08}/participant/delete, /health, /service/health, /${version.external08}/notification/topic/list
+
+        - id: hcx-onboard-api-route
+          uri: ${hcx-onboard.basePath}
+          filters:
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: 10
+                redis-rate-limiter.burstCapacity: 20
+            - RewritePath=/${version.external07}/participant/(?<segment>/?.*), /${version.internal}/participant/$\{segment}
+            - RewritePath=/${version.external07}/applicant/(?<segment>/?.*), /${version.internal}/applicant/$\{segment}
+          predicates:
+            - Path=/${version.external07}/participant/verify, /${version.external07}/participant/verify/identity, /${version.external07}/participant/otp/send, /${version.external07}/participant/onboard/update, /${version.external07}/applicant/getinfo, /${version.external07}/applicant/verify
