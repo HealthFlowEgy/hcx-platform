@@ -1,0 +1,100 @@
+spring:
+  profiles:
+    active: egyptian
+  
+  application:
+    name: hcx-apis-egyptian
+
+# Egyptian HCX Configuration
+hcx:
+  egyptian:
+    kyc:
+      registry:
+        url: ${EGYPTIAN_KYC_REGISTRY_URL:http://localhost:8082}
+        api-key: ${EGYPTIAN_KYC_REGISTRY_API_KEY:}
+        timeout: 10000
+        retry:
+          max-attempts: 3
+          delay: 1000
+    
+    government:
+      moi:
+        ekyc:
+          url: ${MOI_EKYC_API_URL:https://api.moi.gov.eg/ekyc}
+          api-key: ${MOI_EKYC_API_KEY:}
+      
+      ntra:
+        api:
+          url: ${NTRA_API_URL:https://api.ntra.gov.eg}
+          api-key: ${NTRA_API_KEY:}
+      
+      fra:
+        api:
+          url: ${FRA_API_URL:https://api.fra.gov.eg}
+          api-key: ${FRA_API_KEY:}
+    
+    sms:
+      cequens:
+        api:
+          url: ${CEQUENS_API_URL:https://api.cequens.com}
+          username: ${CEQUENS_USERNAME:}
+          password: ${CEQUENS_PASSWORD:}
+        sender-name: ${CEQUENS_SENDER_NAME:HealthFlow}
+
+# HCX Protocol Configuration
+hcx-protocol:
+  version: "0.9"
+  participant-code: ${HCX_PARTICIPANT_CODE:EGYPTIAN_HCX_GATEWAY}
+  base-url: ${HCX_BASE_URL:http://localhost:8080}
+  
+  encryption:
+    enabled: true
+    algorithm: "AES-256-GCM"
+    key: ${HCX_ENCRYPTION_KEY:your-hcx-encryption-key}
+  
+  signature:
+    enabled: true
+    algorithm: "RS256"
+    private-key-path: ${HCX_PRIVATE_KEY_PATH:/etc/hcx/private-key.pem}
+    public-key-path: ${HCX_PUBLIC_KEY_PATH:/etc/hcx/public-key.pem}
+
+# Logging Configuration
+logging:
+  level:
+    org.swasth.hcx: DEBUG
+    org.swasth.hcx.service.HcxIntegrationService: DEBUG
+    org.swasth.hcx.controller.EgyptianHcxController: DEBUG
+  
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level [%X{correlationId}] %logger{36} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level [%X{correlationId}] %logger{36} - %msg%n"
+
+# Management and Monitoring
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus,egyptian
+  
+  endpoint:
+    health:
+      show-details: when-authorized
+      show-components: always
+    
+    egyptian:
+      enabled: true
+
+# Egyptian Healthcare Ecosystem Integration
+egyptian:
+  healthcare:
+    ecosystem:
+      enabled: true
+      services:
+        kyc-registry:
+          url: ${EGYPTIAN_KYC_REGISTRY_URL:http://localhost:8082}
+          health-check-interval: 30000
+        
+        hcx-integration:
+          url: ${EGYPTIAN_HCX_INTEGRATION_URL:http://localhost:8081}
+          health-check-interval: 30000
+
