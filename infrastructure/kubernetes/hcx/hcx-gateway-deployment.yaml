@@ -1,0 +1,86 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hcx-gateway
+  namespace: healthcare-hcx
+  labels:
+    app: hcx-gateway
+    version: v1
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: hcx-gateway
+  template:
+    metadata:
+      labels:
+        app: hcx-gateway
+        version: v1
+    spec:
+      containers:
+      - name: hcx-gateway
+        image: healthflowegy/hcx-gateway:latest
+        ports:
+        - containerPort: 8080
+          name: http
+        env:
+        - name: SPRING_PROFILES_ACTIVE
+          valueFrom:
+            configMapKeyRef:
+              name: hcx-config
+              key: SPRING_PROFILES_ACTIVE
+        - name: HCX_PARTICIPANT_CODE
+          valueFrom:
+            secretKeyRef:
+              name: hcx-secrets
+              key: HCX_PARTICIPANT_CODE
+        - name: HCX_GATEWAY_URL
+          valueFrom:
+            configMapKeyRef:
+              name: hcx-config
+              key: HCX_GATEWAY_URL
+        - name: DATABASE_URL
+          value: "jdbc:postgresql://postgres-service.healthcare-hcx:5432/hcx"
+        - name: DATABASE_USERNAME
+          value: "hcx_user"
+        - name: DATABASE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: hcx-secrets
+              key: DATABASE_PASSWORD
+        - name: FHIR_SERVICE_URL
+          value: "http://hcx-fhir-service:8080"
+        resources:
+          requests:
+            memory: "1Gi"
+            cpu: "500m"
+          limits:
+            memory: "2Gi"
+            cpu: "1000m"
+        livenessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8080
+          initialDelaySeconds: 60
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /actuator/health/readiness
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hcx-gateway-service
+  namespace: healthcare-hcx
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+    targetPort: 8080
+    name: http
+  selector:
+    app: hcx-gateway

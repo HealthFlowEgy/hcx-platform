@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: healthcare-hcx
+  labels:
+    app: hcx-protocol
+    environment: production
