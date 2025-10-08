@@ -1,0 +1,250 @@
+name: HCX Platform CI/CD - Sprint 1
+# Continuous Integration & Deployment Pipeline
+
+on:
+  pull_request:
+    branches: [main, develop, feature/sprint-01-infrastructure]
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
+  push:
+    branches: [main, develop, feature/sprint-01-infrastructure]
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
+  workflow_dispatch:
+
+env:
+  JAVA_VERSION: '17'
+  NODE_VERSION: '18'
+  DOCKER_REGISTRY: docker.io
+  IMAGE_NAME: hcx-platform
+
+jobs:
+  # ============================================
+  # Code Quality & Linting
+  # ============================================
+  
+  code-quality:
+    name: Code Quality Analysis
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: ${{ env.JAVA_VERSION }}
+          distribution: 'temurin'
+          cache: 'maven'
+      
+      - name: Run Maven Verify
+        run: |
+          cd api-gateway
+          mvn clean verify -DskipTests
+      
+      - name: Upload Build Artifacts
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-results
+          path: api-gateway/target/*.jar
+
+  # ============================================
+  # Backend Tests
+  # ============================================
+  
+  backend-tests:
+    name: Backend Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    
+    services:
+      postgres:
+        image: postgres:15-alpine
+        env:
+          POSTGRES_PASSWORD: test_password
+          POSTGRES_DB: hcx_test
+          POSTGRES_USER: hcx_user
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+      
+      redis:
+        image: redis:7-alpine
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 6379:6379
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: ${{ env.JAVA_VERSION }}
+          distribution: 'temurin'
+          cache: 'maven'
+      
+      - name: Run Unit Tests
+        run: |
+          cd api-gateway
+          mvn test -Dspring.profiles.active=test
+        env:
+          POSTGRES_HOST: localhost
+          POSTGRES_PORT: 5432
+          POSTGRES_DB: hcx_test
+          POSTGRES_USER: hcx_user
+          POSTGRES_PASSWORD: test_password
+          REDIS_HOST: localhost
+          REDIS_PORT: 6379
+      
+      - name: Upload Test Results
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: backend-test-results
+          path: |
+            api-gateway/target/surefire-reports/
+            api-gateway/target/site/jacoco/
+
+  # ============================================
+  # Security Scanning
+  # ============================================
+  
+  security-scan:
+    name: Security Vulnerability Scan
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Run Trivy Vulnerability Scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+          severity: 'CRITICAL,HIGH'
+      
+      - name: Upload Trivy Results
+        uses: github/codeql-action/upload-sarif@v2
+        if: always()
+        with:
+          sarif_file: 'trivy-results.sarif'
+
+  # ============================================
+  # Build Docker Images
+  # ============================================
+  
+  build-images:
+    name: Build Docker Images
+    runs-on: ubuntu-latest
+    needs: [backend-tests]
+    if: github.event_name == 'push'
+    timeout-minutes: 30
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop'
+      
+      - name: Extract metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.DOCKER_REGISTRY }}/${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}-gateway
+          tags: |
+            type=ref,event=branch
+            type=ref,event=pr
+            type=sha,prefix={{branch}}-
+      
+      - name: Build Gateway Image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./api-gateway
+          file: ./api-gateway/Dockerfile
+          push: false
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          build-args: |
+            BUILD_DATE=${{ github.event.head_commit.timestamp }}
+            VCS_REF=${{ github.sha }}
+            VERSION=${{ github.ref_name }}
+
+  # ============================================
+  # Deployment Validation
+  # ============================================
+  
+  validate-deployment:
+    name: Validate Deployment Configuration
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Validate Docker Compose
+        run: |
+          docker-compose -f docker-compose.sprint1.yml config
+      
+      - name: Check Environment Variables
+        run: |
+          if [ ! -f .env.sprint1 ]; then
+            echo "Environment file missing"
+            exit 1
+          fi
+          echo "Environment configuration validated"
+      
+      - name: Validate Database Scripts
+        run: |
+          if [ ! -f docker/postgres/init/01-create-databases.sh ]; then
+            echo "Database init script missing"
+            exit 1
+          fi
+          echo "Database scripts validated"
+
+  # ============================================
+  # Notification on Completion
+  # ============================================
+  
+  notify-completion:
+    name: Notify Build Status
+    runs-on: ubuntu-latest
+    needs: [code-quality, backend-tests, security-scan, build-images, validate-deployment]
+    if: always()
+    
+    steps:
+      - name: Check Build Status
+        run: |
+          echo "Build Status: ${{ job.status }}"
+          echo "All jobs completed"
