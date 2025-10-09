@@ -1,0 +1,817 @@
+openapi: 3.0.3
+info:
+  title: HCX Platform API
+  version: 1.0.0
+  description: |
+    Healthcare Claims Exchange (HCX) Platform API
+    
+    This API provides endpoints for managing healthcare claims, provider networks,
+    eligibility checks, pre-authorizations, and policy digitization.
+    
+    ## Authentication
+    All endpoints require JWT bearer token authentication unless specified otherwise.
+    
+    ## Rate Limiting
+    - 1000 requests per hour for authenticated users
+    - 100 requests per hour for unauthenticated users
+    
+  contact:
+    name: HealthFlow Egypt Support
+    email: support@healthflow.tech
+    url: https://healthflow.tech
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+
+servers:
+  - url: https://api.hcx.healthflow.tech/v1
+    description: Production
+  - url: https://staging-api.hcx.healthflow.tech/v1
+    description: Staging
+  - url: http://localhost:8080/api/v1
+    description: Development
+
+tags:
+  - name: Authentication
+    description: User authentication and authorization
+  - name: Claims
+    description: Claims management and submission
+  - name: Documents
+    description: Document upload and management
+  - name: Communication
+    description: Query and response system
+  - name: Providers
+    description: Provider network management
+  - name: Eligibility
+    description: Eligibility verification
+  - name: Pre-Authorization
+    description: Pre-authorization requests
+  - name: Dashboard
+    description: Dashboard metrics and analytics
+  - name: Policies
+    description: Policy digitization and review
+
+paths:
+  # Authentication Endpoints
+  /auth/login:
+    post:
+      tags: [Authentication]
+      summary: User login
+      description: Authenticate user and receive JWT tokens
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, password]
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: provider@example.com
+                password:
+                  type: string
+                  format: password
+                  example: SecurePassword123!
+      responses:
+        '200':
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+
+  /auth/refresh:
+    post:
+      tags: [Authentication]
+      summary: Refresh access token
+      description: Get new access token using refresh token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [refresh_token]
+              properties:
+                refresh_token:
+                  type: string
+      responses:
+        '200':
+          description: Token refreshed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  # Claims Endpoints
+  /claims:
+    get:
+      tags: [Claims]
+      summary: List claims
+      description: Get paginated list of claims with optional filters
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [submitted, approved, rejected, pending]
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+            minimum: 1
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 20
+            minimum: 1
+            maximum: 100
+        - name: sort
+          in: query
+          schema:
+            type: string
+            enum: [created_at, amount, status]
+            default: created_at
+        - name: order
+          in: query
+          schema:
+            type: string
+            enum: [asc, desc]
+            default: desc
+      responses:
+        '200':
+          description: Claims list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClaimsListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    
+    post:
+      tags: [Claims]
+      summary: Submit new claim
+      description: Create and submit a new healthcare claim
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClaimSubmissionRequest'
+      responses:
+        '201':
+          description: Claim submitted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Claim'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+
+  /claims/{claimId}:
+    get:
+      tags: [Claims]
+      summary: Get claim details
+      description: Retrieve detailed information about a specific claim
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: claimId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Claim details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Claim'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /claims/{claimId}/status:
+    get:
+      tags: [Claims]
+      summary: Get claim status history
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: claimId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Status history
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ClaimStatusUpdate'
+
+  # Documents Endpoints
+  /documents/upload:
+    post:
+      tags: [Documents]
+      summary: Upload document
+      description: Upload a document related to a claim
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [file, category, claimId]
+              properties:
+                file:
+                  type: string
+                  format: binary
+                category:
+                  type: string
+                  enum: [medical_records, prescriptions, lab_reports, invoices, discharge_summary]
+                claimId:
+                  type: string
+                description:
+                  type: string
+      responses:
+        '200':
+          description: Document uploaded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Document'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /documents/{documentId}:
+    get:
+      tags: [Documents]
+      summary: Get document
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: documentId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Document details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Document'
+    
+    delete:
+      tags: [Documents]
+      summary: Delete document
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: documentId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Document deleted
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  # Communication Endpoints
+  /communication/request:
+    post:
+      tags: [Communication]
+      summary: Send query
+      description: Send a new query to payor
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [claimId, subject, message]
+              properties:
+                claimId:
+                  type: string
+                subject:
+                  type: string
+                message:
+                  type: string
+                priority:
+                  type: string
+                  enum: [low, medium, high]
+                  default: medium
+      responses:
+        '201':
+          description: Query sent
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Query'
+
+  /communication/queries:
+    get:
+      tags: [Communication]
+      summary: List queries
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: claimId
+          in: query
+          schema:
+            type: string
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [open, resolved]
+      responses:
+        '200':
+          description: Queries list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Query'
+
+  /communication/queries/{queryId}:
+    get:
+      tags: [Communication]
+      summary: Get query thread
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: queryId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Query thread
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueryThread'
+
+  /communication/response:
+    post:
+      tags: [Communication]
+      summary: Send response
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [queryId, message]
+              properties:
+                queryId:
+                  type: string
+                message:
+                  type: string
+      responses:
+        '201':
+          description: Response sent
+
+  /communication/queries/{queryId}/resolve:
+    post:
+      tags: [Communication]
+      summary: Mark query as resolved
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: queryId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Query resolved
+
+  # Dashboard Endpoints
+  /dashboard/provider:
+    get:
+      tags: [Dashboard]
+      summary: Get provider dashboard data
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Dashboard data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashboardData'
+
+  /dashboard/provider/metrics:
+    get:
+      tags: [Dashboard]
+      summary: Get dashboard metrics
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Metrics data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashboardMetrics'
+
+  # Policy Review Endpoints
+  /policies/{policyId}/review:
+    get:
+      tags: [Policies]
+      summary: Get policy review data
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: policyId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Policy review data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PolicyReview'
+
+  /policies/{policyId}/fields/{fieldId}:
+    patch:
+      tags: [Policies]
+      summary: Update extracted field
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: policyId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: fieldId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [value]
+              properties:
+                value:
+                  type: string
+      responses:
+        '200':
+          description: Field updated
+
+  /policies/{policyId}/approval:
+    post:
+      tags: [Policies]
+      summary: Submit policy approval
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: policyId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [approved]
+              properties:
+                approved:
+                  type: boolean
+                reason:
+                  type: string
+                comments:
+                  type: string
+      responses:
+        '200':
+          description: Approval submitted
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    AuthResponse:
+      type: object
+      properties:
+        access_token:
+          type: string
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+        refresh_token:
+          type: string
+        expires_in:
+          type: integer
+          example: 3600
+        token_type:
+          type: string
+          example: Bearer
+        user:
+          $ref: '#/components/schemas/User'
+
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        email:
+          type: string
+          format: email
+        name:
+          type: string
+        role:
+          type: string
+          enum: [provider, payor, beneficiary, admin]
+        organization:
+          type: string
+
+    Claim:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        claimNumber:
+          type: string
+          example: CLM-2025-001234
+        patientName:
+          type: string
+        patientId:
+          type: string
+        providerId:
+          type: string
+        payorId:
+          type: string
+        status:
+          type: string
+          enum: [submitted, approved, rejected, pending]
+        amount:
+          type: number
+          format: double
+        currency:
+          type: string
+          default: INR
+        serviceDate:
+          type: string
+          format: date
+        submittedAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    ClaimSubmissionRequest:
+      type: object
+      required: [patientId, serviceDate, amount, items]
+      properties:
+        patientId:
+          type: string
+        serviceDate:
+          type: string
+          format: date
+        amount:
+          type: number
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              code:
+                type: string
+              description:
+                type: string
+              quantity:
+                type: integer
+              unitPrice:
+                type: number
+
+    ClaimsListResponse:
+      type: object
+      properties:
+        claims:
+          type: array
+          items:
+            $ref: '#/components/schemas/Claim'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+
+    Pagination:
+      type: object
+      properties:
+        page:
+          type: integer
+        limit:
+          type: integer
+        total:
+          type: integer
+        totalPages:
+          type: integer
+
+    Document:
+      type: object
+      properties:
+        id:
+          type: string
+        originalName:
+          type: string
+        url:
+          type: string
+        size:
+          type: integer
+        mimeType:
+          type: string
+        category:
+          type: string
+        uploadedAt:
+          type: string
+          format: date-time
+
+    Query:
+      type: object
+      properties:
+        id:
+          type: string
+        claimId:
+          type: string
+        subject:
+          type: string
+        priority:
+          type: string
+        status:
+          type: string
+        lastMessage:
+          type: string
+        unreadCount:
+          type: integer
+        createdAt:
+          type: string
+          format: date-time
+
+    QueryThread:
+      type: object
+      properties:
+        id:
+          type: string
+        subject:
+          type: string
+        status:
+          type: string
+        priority:
+          type: string
+        messages:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              content:
+                type: string
+              senderName:
+                type: string
+              senderRole:
+                type: string
+              timestamp:
+                type: string
+                format: date-time
+
+    DashboardData:
+      type: object
+      properties:
+        metrics:
+          $ref: '#/components/schemas/DashboardMetrics'
+        approvalRateHistory:
+          type: array
+          items:
+            type: object
+        revenueTrend:
+          type: array
+          items:
+            type: object
+
+    DashboardMetrics:
+      type: object
+      properties:
+        totalClaims:
+          type: integer
+        approvalRate:
+          type: number
+        averageTAT:
+          type: number
+        totalRevenue:
+          type: number
+
+    PolicyReview:
+      type: object
+      properties:
+        policy:
+          type: object
+        extractedData:
+          type: object
+        comments:
+          type: array
+          items:
+            type: object
+
+    ClaimStatusUpdate:
+      type: object
+      properties:
+        status:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+        updatedBy:
+          type: string
+        notes:
+          type: string
+
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        details:
+          type: object
+
+  responses:
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    
+    ValidationError:
+      description: Validation error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
