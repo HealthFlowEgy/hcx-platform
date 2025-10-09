@@ -1,0 +1,371 @@
+version: '3.8'
+
+# HCX Protocol - Complete Development Environment
+# Sprint 1 - Infrastructure Setup
+# Zero Disruption: All services isolated with dedicated networks
+
+services:
+  # ============================================
+  # CORE HCX SERVICES (Existing Platform)
+  # ============================================
+  
+  hcx-gateway:
+    build:
+      context: ./api-gateway
+      dockerfile: Dockerfile
+    container_name: hcx-gateway
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+      POSTGRES_HOST: postgres
+      POSTGRES_DB: hcx_gateway
+      POSTGRES_USER: hcx_user
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-hcx_secure_pass}
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+      JWT_SECRET: ${JWT_SECRET:-dev_jwt_secret_change_in_prod}
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+    networks:
+      - hcx-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    volumes:
+      - ./logs/gateway:/app/logs
+    restart: unless-stopped
+
+  # ============================================
+  # DATABASES
+  # ============================================
+  
+  postgres:
+    image: postgres:15-alpine
+    container_name: hcx-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: hcx_user
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-hcx_secure_pass}
+      POSTGRES_DB: hcx_gateway
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./docker/postgres/init:/docker-entrypoint-initdb.d
+      - ./docker/postgres/seed:/docker-seed
+    networks:
+      - hcx-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U hcx_user -d hcx_gateway"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  # ============================================
+  # CACHING & MESSAGE QUEUE
+  # ============================================
+  
+  redis:
+    image: redis:7-alpine
+    container_name: hcx-redis
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD:-redis_secure_pass}
+    volumes:
+      - redis-data:/data
+    networks:
+      - hcx-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+    restart: unless-stopped
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.5.0
+    container_name: hcx-zookeeper
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    volumes:
+      - zookeeper-data:/var/lib/zookeeper/data
+      - zookeeper-logs:/var/lib/zookeeper/log
+    networks:
+      - hcx-network
+    healthcheck:
+      test: ["CMD", "nc", "-z", "localhost", "2181"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  kafka:
+    image: confluentinc/cp-kafka:7.5.0
+    container_name: hcx-kafka
+    depends_on:
+      zookeeper:
+        condition: service_healthy
+    ports:
+      - "9092:9092"
+      - "9093:9093"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:9093
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+    volumes:
+      - kafka-data:/var/lib/kafka/data
+    networks:
+      - hcx-network
+    healthcheck:
+      test: ["CMD", "kafka-broker-api-versions", "--bootstrap-server", "localhost:9092"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    restart: unless-stopped
+
+  # ============================================
+  # MONITORING & OBSERVABILITY
+  # ============================================
+  
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: hcx-prometheus
+    ports:
+      - "9090:9090"
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.enable-lifecycle'
+    volumes:
+      - ./docker/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus-data:/prometheus
+    networks:
+      - hcx-network
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:9090/-/healthy"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: hcx-grafana
+    ports:
+      - "3000:3000"
+    environment:
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_PASSWORD:-admin123}
+      GF_INSTALL_PLUGINS: grafana-clock-panel,grafana-simple-json-datasource
+    volumes:
+      - ./docker/grafana/provisioning:/etc/grafana/provisioning
+      - ./docker/grafana/dashboards:/var/lib/grafana/dashboards
+      - grafana-data:/var/lib/grafana
+    depends_on:
+      - prometheus
+    networks:
+      - hcx-network
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+
+  # ============================================
+  # LOGGING STACK (ELK)
+  # ============================================
+  
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.10.0
+    container_name: hcx-elasticsearch
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    volumes:
+      - elasticsearch-data:/usr/share/elasticsearch/data
+    networks:
+      - hcx-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9200/_cluster/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    restart: unless-stopped
+
+  logstash:
+    image: docker.elastic.co/logstash/logstash:8.10.0
+    container_name: hcx-logstash
+    ports:
+      - "5044:5044"
+      - "5000:5000/tcp"
+      - "5000:5000/udp"
+      - "9600:9600"
+    environment:
+      LS_JAVA_OPTS: "-Xmx256m -Xms256m"
+    volumes:
+      - ./docker/logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml
+      - ./docker/logstash/pipeline:/usr/share/logstash/pipeline
+      - ./logs:/logs:ro
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+    networks:
+      - hcx-network
+    restart: unless-stopped
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.10.0
+    container_name: hcx-kibana
+    ports:
+      - "5601:5601"
+    environment:
+      ELASTICSEARCH_HOSTS: http://elasticsearch:9200
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+    networks:
+      - hcx-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5601/api/status"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    restart: unless-stopped
+
+  # ============================================
+  # AI/ML SERVICES (New for Sprint 1)
+  # ============================================
+  
+  ai-policy-service:
+    build:
+      context: ./ai-services/policy-digitization
+      dockerfile: Dockerfile
+    container_name: hcx-ai-policy-service
+    ports:
+      - "8081:8000"
+    environment:
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      POSTGRES_HOST: postgres
+      POSTGRES_DB: hcx_ai_services
+      POSTGRES_USER: hcx_user
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-hcx_secure_pass}
+      REDIS_HOST: redis
+      REDIS_PASSWORD: ${REDIS_PASSWORD:-redis_secure_pass}
+    volumes:
+      - ./ai-services/policy-digitization:/app
+      - ./data/policies:/data/policies
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - hcx-network
+    restart: unless-stopped
+
+  # ============================================
+  # DEVELOPMENT TOOLS
+  # ============================================
+  
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: hcx-pgadmin
+    ports:
+      - "5050:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@hcx.local
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD:-admin123}
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    networks:
+      - hcx-network
+    restart: unless-stopped
+    profiles:
+      - dev-tools
+
+  redis-commander:
+    image: rediscommander/redis-commander:latest
+    container_name: hcx-redis-commander
+    ports:
+      - "8082:8081"
+    environment:
+      REDIS_HOSTS: local:redis:6379:0:${REDIS_PASSWORD:-redis_secure_pass}
+    depends_on:
+      - redis
+    networks:
+      - hcx-network
+    restart: unless-stopped
+    profiles:
+      - dev-tools
+
+  kafka-ui:
+    image: provectuslabs/kafka-ui:latest
+    container_name: hcx-kafka-ui
+    ports:
+      - "8083:8080"
+    environment:
+      KAFKA_CLUSTERS_0_NAME: local
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092
+      KAFKA_CLUSTERS_0_ZOOKEEPER: zookeeper:2181
+    depends_on:
+      - kafka
+    networks:
+      - hcx-network
+    restart: unless-stopped
+    profiles:
+      - dev-tools
+
+# ============================================
+# NETWORKS
+# ============================================
+
+networks:
+  hcx-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.25.0.0/16
+
+# ============================================
+# VOLUMES (Persistent Data)
+# ============================================
+
+volumes:
+  postgres-data:
+    driver: local
+  redis-data:
+    driver: local
+  kafka-data:
+    driver: local
+  zookeeper-data:
+    driver: local
+  zookeeper-logs:
+    driver: local
+  elasticsearch-data:
+    driver: local
+  prometheus-data:
+    driver: local
+  grafana-data:
+    driver: local
+  pgadmin-data:
+    driver: local

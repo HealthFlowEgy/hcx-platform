@@ -1,0 +1,290 @@
+name: Test Suite
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+      - 'feature/**'
+  pull_request:
+    branches:
+      - main
+      - develop
+  workflow_dispatch:
+
+env:
+  JAVA_VERSION: '17'
+  NODE_VERSION: '18'
+
+jobs:
+  # ============================================
+  # Backend Unit Tests
+  # ============================================
+  backend-unit-tests:
+    name: Backend Unit Tests
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: ${{ env.JAVA_VERSION }}
+          distribution: 'temurin'
+          cache: 'maven'
+
+      - name: Run unit tests
+        run: |
+          cd tests/backend
+          mvn clean test
+
+      - name: Generate coverage report
+        run: |
+          cd tests/backend
+          mvn jacoco:report
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          files: tests/backend/target/site/jacoco/jacoco.xml
+          flags: backend
+          name: backend-coverage
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: backend-test-results
+          path: tests/backend/target/surefire-reports/
+
+  # ============================================
+  # Frontend Unit Tests
+  # ============================================
+  frontend-unit-tests:
+    name: Frontend Unit Tests
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: tests/frontend/package-lock.json
+
+      - name: Install dependencies
+        run: |
+          cd tests/frontend
+          npm ci
+
+      - name: Run tests with coverage
+        run: |
+          cd tests/frontend
+          npm run test:ci
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          files: tests/frontend/coverage/lcov.info
+          flags: frontend
+          name: frontend-coverage
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: frontend-test-results
+          path: tests/frontend/coverage/
+
+  # ============================================
+  # Integration Tests
+  # ============================================
+  integration-tests:
+    name: Integration Tests
+    runs-on: ubuntu-latest
+    
+    services:
+      postgres:
+        image: postgres:15-alpine
+        env:
+          POSTGRES_DB: hcx_test
+          POSTGRES_USER: test
+          POSTGRES_PASSWORD: test
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
+      redis:
+        image: redis:7-alpine
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 6379:6379
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: ${{ env.JAVA_VERSION }}
+          distribution: 'temurin'
+          cache: 'maven'
+
+      - name: Run integration tests
+        run: |
+          cd tests/integration
+          mvn clean verify
+        env:
+          SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/hcx_test
+          SPRING_DATASOURCE_USERNAME: test
+          SPRING_DATASOURCE_PASSWORD: test
+          SPRING_REDIS_HOST: localhost
+          SPRING_REDIS_PORT: 6379
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: integration-test-results
+          path: tests/integration/target/failsafe-reports/
+
+  # ============================================
+  # End-to-End Tests
+  # ============================================
+  e2e-tests:
+    name: End-to-End Tests
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Install dependencies
+        run: |
+          cd tests/e2e
+          npm ci
+
+      - name: Run Cypress tests
+        uses: cypress-io/github-action@v5
+        with:
+          working-directory: tests/e2e
+          start: npm start
+          wait-on: 'http://localhost:3000'
+          wait-on-timeout: 120
+          browser: chrome
+          record: true
+        env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+
+      - name: Upload screenshots
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: cypress-screenshots
+          path: tests/e2e/cypress/screenshots/
+
+      - name: Upload videos
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: cypress-videos
+          path: tests/e2e/cypress/videos/
+
+  # ============================================
+  # Performance Tests (Main branch only)
+  # ============================================
+  performance-tests:
+    name: Performance Tests
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run k6 load test
+        uses: grafana/k6-action@v0.3.0
+        with:
+          filename: tests/performance/claim-submission-load.js
+          flags: --out json=results.json
+        env:
+          BASE_URL: ${{ secrets.PERFORMANCE_TEST_URL || 'http://localhost:8080/api/v1' }}
+
+      - name: Upload k6 results
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: k6-results
+          path: results.json
+
+  # ============================================
+  # Test Summary
+  # ============================================
+  test-summary:
+    name: Test Summary
+    runs-on: ubuntu-latest
+    needs: [backend-unit-tests, frontend-unit-tests, integration-tests, e2e-tests]
+    if: always()
+    
+    steps:
+      - name: Download all artifacts
+        uses: actions/download-artifact@v3
+
+      - name: Generate test summary
+        run: |
+          echo "# Test Suite Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "## Test Results" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Test Suite | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|------------|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Backend Unit Tests | ${{ needs.backend-unit-tests.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Frontend Unit Tests | ${{ needs.frontend-unit-tests.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Integration Tests | ${{ needs.integration-tests.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| E2E Tests | ${{ needs.e2e-tests.result }} |" >> $GITHUB_STEP_SUMMARY
+
+  # ============================================
+  # Code Quality Check
+  # ============================================
+  code-quality:
+    name: Code Quality
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: >
+            -Dsonar.projectKey=hcx-platform
+            -Dsonar.organization=healthflowegy
+            -Dsonar.sources=.
+            -Dsonar.tests=tests/
+            -Dsonar.coverage.jacoco.xmlReportPaths=tests/backend/target/site/jacoco/jacoco.xml
+            -Dsonar.javascript.lcov.reportPaths=tests/frontend/coverage/lcov.info
