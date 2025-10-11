@@ -1,0 +1,30 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: hcx-ingress
+  annotations:
+    kubernetes.io/ingress.class: "gce"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  rules:
+  - host: hcx.healthflowegy.com
+    http:
+      paths:
+      - path: /api/v1/hcx
+        pathType: Prefix
+        backend:
+          service:
+            name: hcx-apis
+            port:
+              number: 8081
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: api-gateway
+            port:
+              number: 8080
+  tls:
+  - hosts:
+    - hcx.healthflowegy.com
+    secretName: hcx-tls-cert
