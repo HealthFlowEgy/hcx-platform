@@ -40,7 +40,7 @@
       },
       "author": [{
         "reference": "Practitioner/1",
-        "display": "Dr. Sudhir Naik (PMJAY Gujrat)"
+        "display": "Dr. Sudhir Naik (EHI Cairo)"
       }],
       "title": "Coverage Eligibility Request",
       "attester": [{
@@ -48,7 +48,7 @@
         "time": "2021-12-22T14:10:14Z",
         "party": {
           "reference": "Organization/2",
-          "display": "PMJAY, MoHFW, Govt Of India"
+          "display": "Egyptian Health Insurance, Ministry of Health, Govt Of Egypt"
         }
       }],
       "section": [{
@@ -399,21 +399,21 @@
         "identifier": [{
           "type": {
             "coding": [{
-              "system": "http://ndhm.gov.in/ValueSet/identifier-type",
+              "system": "http://ehi.gov.eg/ValueSet/identifier-type",
               "code": "PHRADDR"
             }]
           },
-          "system": "http://ndhm.gov.in/healthId",
+          "system": "http://ehi.gov.eg/healthId",
           "value": "654321"
         },
           {
             "type": {
               "coding": [{
-                "system": "http://ndhm.gov.in/ValueSet/identifier-type",
-                "code": "PMJAYID"
+                "system": "http://ehi.gov.eg/ValueSet/identifier-type",
+                "code": "EHIID"
               }]
             },
-            "system": "http://ndhm.gov.in/pmjay",
+            "system": "http://ehi.gov.eg/insurance",
             "value": "QWRT12345"
           }
         ],
@@ -428,7 +428,7 @@
         "id": "MaxSaket01",
         "name": "Max Super Speciality Hospital, Saket",
         "identifier": [{
-          "system": "https://ndhm.gov.in/hfr",
+          "system": "https://ehi.gov.eg/hfr",
           "value": "HFR-10000005"
         }]
       }
@@ -438,10 +438,10 @@
       "resource": {
         "resourceType": "Organization",
         "id": "2",
-        "name": "PMJAY, MoHFW, Govt Of India",
+        "name": "Egyptian Health Insurance, Ministry of Health, Govt Of Egypt",
         "identifier": [{
           "system": "https://hcx.org/orgs",
-          "value": "PMJAY"
+          "value": "EHI"
         }]
       }
     },
@@ -451,11 +451,11 @@
         "resourceType": "Practitioner",
         "id": "1",
         "identifier": [{
-          "system": "https://ndhm.gov.in/npr",
+          "system": "https://ehi.gov.eg/npr",
           "value": "NPR-6897"
         }],
         "name": [{
-          "text": "Sudhir Naik (PMJAY Gujrat)",
+          "text": "Sudhir Naik (EHI Cairo)",
           "prefix": [
             "Dr"
           ],

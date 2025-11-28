@@ -24,7 +24,7 @@
       }
     ]
   }],
-  "name": "PMJAY-Mukhyamantri Amrutam & Mukhyamantri Vatsalya",
+  "name": "EHI-Egyptian Universal Health Insurance",
   "period": {
     "start": "2020-09-23"
   },
@@ -34,7 +34,7 @@
   },
   "administeredBy": {
     "reference": "Organization/AB_GUJ_TPA_1",
-    "display": "MD India Healthcare Service (TPA) Pvt. Ltd."
+    "display": "MD Egypt Healthcare Service (TPA) Ltd."
   },
   "coverageArea": [{
     "reference": "Location/GUJARAT",
@@ -76,7 +76,7 @@
         "coding": [
           {
             "system": "http://terminologyServer/ValueSets/plan-type",
-            "code": "PMJAY_GUJ_GOLD_CARD"
+            "code": "EHI_GUJ_GOLD_CARD"
           }
         ]
       },
