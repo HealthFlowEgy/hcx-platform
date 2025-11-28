@@ -1,4 +1,4 @@
-package org.swasth.common.exception;
+package org..common.exception;
 
 import javax.naming.ServiceUnavailableException;
 

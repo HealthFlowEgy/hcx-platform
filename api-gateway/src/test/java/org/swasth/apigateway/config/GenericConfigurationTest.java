@@ -1,4 +1,4 @@
-package org.swasth.apigateway.config;
+package org..apigateway.config;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.runner.ApplicationContextRunner;

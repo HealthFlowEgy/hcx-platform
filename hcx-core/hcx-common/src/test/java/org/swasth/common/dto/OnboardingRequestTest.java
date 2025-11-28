@@ -1,8 +1,8 @@
-package org.swasth.common.dto;
+package org..common.dto;
 
 import org.junit.Test;
-import org.swasth.common.utils.Constants;
-import org.swasth.common.utils.JSONUtils;
+import org..common.utils.Constants;
+import org..common.utils.JSONUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,7 +11,7 @@ import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.swasth.common.utils.Constants.*;
+import static org..common.utils.Constants.*;
 
 public class OnboardingRequestTest {
 
@@ -23,18 +23,18 @@ public class OnboardingRequestTest {
     }
     @Test
     public void testOnboardRequestWithOTPEmailBody() throws Exception {
-        ArrayList<Map<String, Object>> body = JSONUtils.deserialize("[ { \"type\":\"onboard-through-verifier\" ,\"verifier_code\": \"testprovider1.apollo@swasth-hcx-dev\", \"applicant_code\": \"pcpt@01\"  }]", ArrayList.class);
+        ArrayList<Map<String, Object>> body = JSONUtils.deserialize("[ { \"type\":\"onboard-through-verifier\" ,\"verifier_code\": \"testprovider1.apollo@-hcx-dev\", \"applicant_code\": \"pcpt@01\"  }]", ArrayList.class);
         OnboardRequest request = new OnboardRequest(body);
-        assertEquals("testprovider1.apollo@swasth-hcx-dev",request.getVerifierCode());
+        assertEquals("testprovider1.apollo@-hcx-dev",request.getVerifierCode());
         assertEquals("pcpt@01",request.getApplicantCode());
     }
 
     @Test
     public void testOnboardRequestWithPayorCodeBody() throws Exception {
-        ArrayList<Map<String,Object>> body = JSONUtils.deserialize("[ { \"type\":\"\" ,\"verifier_code\": \"testprovider1.apollo@swasth-hcx-dev\", \"participant\": { \"primary_email\": \"testhcx15@yopmail.com\", \"primary_mobile\": \"8522875773\", \"roles\": [ \"provider\" ], \"participant_name\": \"onboard test1\" } } ]", ArrayList.class);
+        ArrayList<Map<String,Object>> body = JSONUtils.deserialize("[ { \"type\":\"\" ,\"verifier_code\": \"testprovider1.apollo@-hcx-dev\", \"participant\": { \"primary_email\": \"testhcx15@yopmail.com\", \"primary_mobile\": \"8522875773\", \"roles\": [ \"provider\" ], \"participant_name\": \"onboard test1\" } } ]", ArrayList.class);
         OnboardRequest request = new OnboardRequest(body);
         Map<String,Object> participantMap = (Map<String, Object>) request.getBody().get("participant");
-        assertEquals("testprovider1.apollo@swasth-hcx-dev", request.getBody().get(VERIFIER_CODE));
+        assertEquals("testprovider1.apollo@-hcx-dev", request.getBody().get(VERIFIER_CODE));
         assertEquals("testhcx15@yopmail.com", participantMap.get(PRIMARY_EMAIL));
     }
 

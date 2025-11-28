@@ -1,4 +1,4 @@
-package org.swasth.hcx.controllers.v1;
+package org..hcx.controllers.v1;
 
 import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Value;
@@ -8,18 +8,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.swasth.common.dto.Response;
-import org.swasth.common.dto.SearchRequest;
-import org.swasth.common.exception.ClientException;
-import org.swasth.common.exception.ErrorCodes;
-import org.swasth.common.utils.Constants;
-import org.swasth.hcx.controllers.BaseController;
+import org..common.dto.Response;
+import org..common.dto.SearchRequest;
+import org..common.exception.ClientException;
+import org..common.exception.ErrorCodes;
+import org..common.utils.Constants;
+import org..hcx.controllers.BaseController;
 
 import java.util.List;
 import java.util.Map;
 
-import static org.swasth.common.utils.Constants.HCX_ON_SEARCH;
-import static org.swasth.common.utils.Constants.HCX_SEARCH;
+import static org..common.utils.Constants.HCX_ON_SEARCH;
+import static org..common.utils.Constants.HCX_SEARCH;
 
 @RestController
 @RequestMapping(Constants.VERSION_PREFIX)

@@ -1,7 +1,7 @@
-package org.swasth.common.utils;
+package org..common.utils;
 
 import org.junit.Test;
-import org.swasth.common.exception.ErrorCodes;
+import org..common.exception.ErrorCodes;
 import java.util.List;
 import static org.junit.Assert.assertTrue;
 

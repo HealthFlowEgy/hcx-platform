@@ -1,7 +1,7 @@
-package org.swasth.dp.notification.task;
+package org..dp.notification.task;
 
 import com.typesafe.config.Config;
-import org.swasth.dp.core.job.BaseJobConfig;
+import org..dp.core.job.BaseJobConfig;
 
 public class NotificationConfig extends BaseJobConfig {
 

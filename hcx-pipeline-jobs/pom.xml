@@ -7,7 +7,7 @@
     <prerequisites>
         <maven>3.0.0</maven>
     </prerequisites>
-    <groupId>org.swasth</groupId>
+    <groupId>org.</groupId>
     <artifactId>pipeline-jobs</artifactId>
     <version>1.0</version>
     <packaging>pom</packaging>
@@ -15,7 +15,7 @@
     <description>
         Datapipeline Flink jobs for stream processing
     </description>
-    <url>https://swasth.org/</url>
+    <url>https://.org/</url>
     <modules>
         <module>core</module>
         <module>coverage-eligibility-job</module>

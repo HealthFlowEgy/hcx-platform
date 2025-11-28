@@ -1,4 +1,4 @@
-package org.swasth.hcx;
+package org..hcx;
 
 import org.junit.jupiter.api.Test;
 

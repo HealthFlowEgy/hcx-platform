@@ -1,7 +1,7 @@
-package org.swasth.apigateway.service;
+package org..apigateway.service;
 
-import org.swasth.apigateway.models.Acl;
-import org.swasth.apigateway.utils.Utils;
+import org..apigateway.models.Acl;
+import org..apigateway.utils.Utils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ServerWebExchange;
 

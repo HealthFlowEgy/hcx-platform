@@ -1,7 +1,7 @@
-package org.swasth.dp.claims.task;
+package org..dp.claims.task;
 
 import com.typesafe.config.Config;
-import org.swasth.dp.core.job.BaseJobConfig;
+import org..dp.core.job.BaseJobConfig;
 
 public class ClaimsConfig extends BaseJobConfig {
 

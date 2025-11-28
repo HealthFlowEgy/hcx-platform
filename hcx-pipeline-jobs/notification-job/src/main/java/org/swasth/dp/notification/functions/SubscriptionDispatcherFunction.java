@@ -1,4 +1,4 @@
-package org.swasth.dp.notification.functions;
+package org..dp.notification.functions;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.flink.configuration.Configuration;
@@ -6,12 +6,12 @@ import org.apache.flink.streaming.api.functions.ProcessFunction;
 import org.apache.flink.util.Collector;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.swasth.dp.core.function.DispatcherResult;
-import org.swasth.dp.core.service.AuditService;
-import org.swasth.dp.core.util.Constants;
-import org.swasth.dp.core.util.DispatcherUtil;
-import org.swasth.dp.core.util.JSONUtil;
-import org.swasth.dp.notification.task.NotificationConfig;
+import org..dp.core.function.DispatcherResult;
+import org..dp.core.service.AuditService;
+import org..dp.core.util.Constants;
+import org..dp.core.util.DispatcherUtil;
+import org..dp.core.util.JSONUtil;
+import org..dp.notification.task.NotificationConfig;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

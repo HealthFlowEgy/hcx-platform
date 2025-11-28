@@ -1,14 +1,14 @@
-package org.swasth.hcx.utils;
+package org..hcx.utils;
 
 import org.elasticsearch.action.search.SearchRequest;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.context.ContextConfiguration;
-import org.swasth.common.dto.AuditSearchRequest;
-import org.swasth.common.utils.Constants;
-import org.swasth.hcx.controllers.BaseSpec;
-import org.swasth.hcx.handlers.EventHandler;
-import org.swasth.hcx.service.NotificationService;
-import org.swasth.hcx.service.ParticipantService;
+import org..common.dto.AuditSearchRequest;
+import org..common.utils.Constants;
+import org..hcx.controllers.BaseSpec;
+import org..hcx.handlers.EventHandler;
+import org..hcx.service.NotificationService;
+import org..hcx.service.ParticipantService;
 
 import java.util.HashMap;
 

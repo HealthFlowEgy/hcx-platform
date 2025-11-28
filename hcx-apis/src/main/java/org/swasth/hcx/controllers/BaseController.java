@@ -1,21 +1,21 @@
-package org.swasth.hcx.controllers;
+package org..hcx.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.swasth.auditindexer.function.AuditIndexer;
-import org.swasth.common.dto.Request;
-import org.swasth.common.dto.Response;
-import org.swasth.common.dto.ResponseError;
-import org.swasth.common.exception.*;
-import org.swasth.common.helpers.EventGenerator;
-import org.swasth.hcx.handlers.EventHandler;
-import org.swasth.hcx.service.AuditService;
+import org..auditindexer.function.AuditIndexer;
+import org..common.dto.Request;
+import org..common.dto.Response;
+import org..common.dto.ResponseError;
+import org..common.exception.*;
+import org..common.helpers.EventGenerator;
+import org..hcx.handlers.EventHandler;
+import org..hcx.service.AuditService;
 
 import java.util.Map;
 
-import static org.swasth.common.utils.Constants.ERROR_STATUS;
+import static org..common.utils.Constants.ERROR_STATUS;
 
 public class BaseController {
 

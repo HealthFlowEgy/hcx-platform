@@ -1,12 +1,12 @@
-package org.swasth.hcx.controllers.v1;
+package org..hcx.controllers.v1;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MvcResult;
-import org.swasth.common.utils.JSONUtils;
-import org.swasth.hcx.controllers.BaseSpec;
+import org..common.utils.JSONUtils;
+import org..hcx.controllers.BaseSpec;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,7 +16,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doNothing;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.swasth.common.utils.Constants.*;
+import static org..common.utils.Constants.*;
 
 class SearchControllerTest extends BaseSpec {
 

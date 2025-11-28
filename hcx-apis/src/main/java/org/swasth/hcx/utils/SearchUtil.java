@@ -1,4 +1,4 @@
-package org.swasth.hcx.utils;
+package org..hcx.utils;
 
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.index.query.BoolQueryBuilder;
@@ -6,8 +6,8 @@ import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.springframework.util.CollectionUtils;
-import org.swasth.common.dto.AuditSearchRequest;
-import org.swasth.common.utils.Constants;
+import org..common.dto.AuditSearchRequest;
+import org..common.utils.Constants;
 
 import java.util.Map;
 import java.util.Map.Entry;

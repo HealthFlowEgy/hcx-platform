@@ -1,11 +1,11 @@
-package org.swasth.hcx.config;
+package org..hcx.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.swasth.common.exception.ClientException;
-import org.swasth.postgresql.IDatabaseService;
-import org.swasth.postgresql.PostgreSQLClient;
+import org..common.exception.ClientException;
+import org..postgresql.IDatabaseService;
+import org..postgresql.PostgreSQLClient;
 
 import java.sql.SQLException;
 

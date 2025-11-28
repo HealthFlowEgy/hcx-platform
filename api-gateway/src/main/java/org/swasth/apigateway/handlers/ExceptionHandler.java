@@ -1,4 +1,4 @@
-package org.swasth.apigateway.handlers;
+package org..apigateway.handlers;
 
 import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -10,22 +10,22 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
-import org.swasth.apigateway.exception.ClientException;
-import org.swasth.apigateway.exception.ErrorCodes;
-import org.swasth.apigateway.exception.JWTVerificationException;
-import org.swasth.apigateway.exception.ServerException;
-import org.swasth.apigateway.models.BaseRequest;
-import org.swasth.apigateway.models.Response;
-import org.swasth.apigateway.models.ResponseError;
-import org.swasth.apigateway.service.AuditService;
-import org.swasth.common.utils.Constants;
-import org.swasth.common.utils.JSONUtils;
+import org..apigateway.exception.ClientException;
+import org..apigateway.exception.ErrorCodes;
+import org..apigateway.exception.JWTVerificationException;
+import org..apigateway.exception.ServerException;
+import org..apigateway.models.BaseRequest;
+import org..apigateway.models.Response;
+import org..apigateway.models.ResponseError;
+import org..apigateway.service.AuditService;
+import org..common.utils.Constants;
+import org..common.utils.JSONUtils;
 import reactor.core.publisher.Mono;
 
 import java.text.MessageFormat;
 import java.util.Map;
 
-import static org.swasth.common.response.ResponseMessage.AUDIT_LOG_MSG;
+import static org..common.response.ResponseMessage.AUDIT_LOG_MSG;
 
 @Component
 public class ExceptionHandler {

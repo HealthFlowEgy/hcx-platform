@@ -1,16 +1,16 @@
-package org.swasth.common.dto;
+package org..common.dto;
 
 import org.junit.Test;
 import org.mockito.Mockito;
-import org.swasth.common.exception.ClientException;
-import org.swasth.common.utils.Constants;
+import org..common.exception.ClientException;
+import org..common.utils.Constants;
 
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.Assert.*;
-import static org.swasth.common.utils.Constants.*;
+import static org..common.utils.Constants.*;
 
 
 public class NotificationListRequestTest {

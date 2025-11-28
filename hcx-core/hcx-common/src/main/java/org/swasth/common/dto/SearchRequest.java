@@ -1,6 +1,6 @@
-package org.swasth.common.dto;
+package org..common.dto;
 
-import org.swasth.common.utils.Constants;
+import org..common.utils.Constants;
 
 import java.util.Map;
 

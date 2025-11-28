@@ -1,4 +1,4 @@
-package org.swasth.hcx.controllers.v1;
+package org..hcx.controllers.v1;
 
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
@@ -10,12 +10,12 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MvcResult;
-import org.swasth.common.dto.Response;
-import org.swasth.common.exception.ErrorCodes;
-import org.swasth.common.utils.Constants;
-import org.swasth.common.utils.JSONUtils;
-import org.swasth.hcx.controllers.BaseSpec;
-import org.swasth.hcx.utils.MockResultSet;
+import org..common.dto.Response;
+import org..common.exception.ErrorCodes;
+import org..common.utils.Constants;
+import org..common.utils.JSONUtils;
+import org..hcx.controllers.BaseSpec;
+import org..hcx.utils.MockResultSet;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -30,7 +30,7 @@ import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.swasth.common.utils.Constants.VERIFICATION_STATUS;
+import static org..common.utils.Constants.VERIFICATION_STATUS;
 
 class ParticipantControllerTests extends BaseSpec{
 

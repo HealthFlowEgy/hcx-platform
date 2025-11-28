@@ -1,13 +1,13 @@
-package org.swasth.hcx.controllers;
+package org..hcx.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.swasth.common.dto.Response;
-import org.swasth.common.utils.Constants;
-import org.swasth.hcx.managers.HealthCheckManager;
+import org..common.dto.Response;
+import org..common.utils.Constants;
+import org..hcx.managers.HealthCheckManager;
 
 @RestController
 public class HealthController extends BaseController {

@@ -1,4 +1,4 @@
-package org.swasth.redis.cache;
+package org..redis.cache;
 
 import com.github.fppt.jedismock.RedisServer;
 import org.junit.jupiter.api.*;

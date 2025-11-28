@@ -1,4 +1,4 @@
-package org.swasth.common.exception;
+package org..common.exception;
 
 public enum ErrorCodes {
     ERR_INVALID_PARTICIPANT_CODE,

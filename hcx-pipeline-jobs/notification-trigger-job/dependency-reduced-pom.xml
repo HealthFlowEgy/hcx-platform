@@ -2,11 +2,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <parent>
     <artifactId>pipeline-jobs</artifactId>
-    <groupId>org.swasth</groupId>
+    <groupId>org.</groupId>
     <version>1.0</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
-  <groupId>org.swasth</groupId>
+  <groupId>org.</groupId>
   <artifactId>notification-trigger-job</artifactId>
   <name>Notification Trigger Job</name>
   <version>1.0.0</version>
@@ -77,7 +77,7 @@
               </filters>
               <transformers>
                 <transformer>
-                  <mainClass>org.swasth.dp.notification.trigger.task.NotificationTriggerStreamTask</mainClass>
+                  <mainClass>org..dp.notification.trigger.task.NotificationTriggerStreamTask</mainClass>
                 </transformer>
               </transformers>
             </configuration>
@@ -128,7 +128,7 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>org.swasth</groupId>
+      <groupId>org.</groupId>
       <artifactId>core</artifactId>
       <version>1.0.0</version>
       <type>test-jar</type>

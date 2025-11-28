@@ -1,17 +1,17 @@
-package org.swasth.apigateway.filters;
+package org..apigateway.filters;
 
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.jayway.jsonpath.JsonPath;
-import org.swasth.apigateway.constants.FilterOrder;
-import org.swasth.apigateway.exception.ErrorCodes;
-import org.swasth.apigateway.exception.JWTVerificationException;
-import org.swasth.apigateway.handlers.ExceptionHandler;
-import org.swasth.apigateway.models.Acl;
-import org.swasth.apigateway.models.BaseRequest;
-import org.swasth.apigateway.security.JwtConfigs;
-import org.swasth.apigateway.service.AuthorizationService;
-import org.swasth.apigateway.utils.Utils;
+import org..apigateway.constants.FilterOrder;
+import org..apigateway.exception.ErrorCodes;
+import org..apigateway.exception.JWTVerificationException;
+import org..apigateway.handlers.ExceptionHandler;
+import org..apigateway.models.Acl;
+import org..apigateway.models.BaseRequest;
+import org..apigateway.security.JwtConfigs;
+import org..apigateway.service.AuthorizationService;
+import org..apigateway.utils.Utils;
 import net.minidev.json.JSONArray;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,16 +29,16 @@ import java.util.Base64;
 import java.util.List;
 import java.util.Map;
 
-import static org.swasth.common.response.ResponseMessage.*;
-import static org.swasth.common.utils.Constants.AUTH_REQUIRED;
-import static org.swasth.common.utils.Constants.X_JWT_SUB_HEADER;
+import static org..common.response.ResponseMessage.*;
+import static org..common.utils.Constants.AUTH_REQUIRED;
+import static org..common.utils.Constants.X_JWT_SUB_HEADER;
 
 /**
  * Authenticates the user by extracting the token from the header and validates the JWT
  * based on the config provided. If the jwt auth is disabled this filter is also disabled.
  * <p>
  * 1. Checks if authentication to be carried out based on attribute set by {@link PreAuthenticationFilter}
- * 2. If auth required, JWT validation is provided by {@link org.swasth.apigateway.security.JWTVerifierFactory}
+ * 2. If auth required, JWT validation is provided by {@link org..apigateway.security.JWTVerifierFactory}
  * 3. Post authentication, authorization checks are carried out for AUTHENTICATED Roles
  * 4. Detailed authorization to be carried out by implementations of {@link AuthorizationService}
  * 5. If authorization / authentication fails, reason is sent out in the WWW-Authenticate header

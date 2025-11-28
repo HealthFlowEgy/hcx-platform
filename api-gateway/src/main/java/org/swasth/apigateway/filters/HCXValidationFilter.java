@@ -1,4 +1,4 @@
-package org.swasth.apigateway.filters;
+package org..apigateway.filters;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -11,19 +11,19 @@ import org.springframework.core.env.Environment;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Component;
-import org.swasth.apigateway.exception.ClientException;
-import org.swasth.apigateway.exception.ErrorCodes;
-import org.swasth.apigateway.handlers.ExceptionHandler;
-import org.swasth.apigateway.handlers.RequestHandler;
-import org.swasth.apigateway.models.BaseRequest;
-import org.swasth.apigateway.models.JSONRequest;
-import org.swasth.apigateway.models.JWERequest;
-import org.swasth.apigateway.service.AuditService;
-import org.swasth.apigateway.service.RegistryService;
-import org.swasth.common.utils.Constants;
-import org.swasth.common.utils.JSONUtils;
-import org.swasth.common.utils.JWTUtils;
-import org.swasth.common.utils.NotificationUtils;
+import org..apigateway.exception.ClientException;
+import org..apigateway.exception.ErrorCodes;
+import org..apigateway.handlers.ExceptionHandler;
+import org..apigateway.handlers.RequestHandler;
+import org..apigateway.models.BaseRequest;
+import org..apigateway.models.JSONRequest;
+import org..apigateway.models.JWERequest;
+import org..apigateway.service.AuditService;
+import org..apigateway.service.RegistryService;
+import org..common.utils.Constants;
+import org..common.utils.JSONUtils;
+import org..common.utils.JWTUtils;
+import org..common.utils.NotificationUtils;
 
 import java.nio.charset.StandardCharsets;
 import java.text.MessageFormat;
@@ -31,8 +31,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import static org.springframework.cloud.gateway.support.ServerWebExchangeUtils.CACHED_REQUEST_BODY_ATTR;
-import static org.swasth.common.response.ResponseMessage.*;
-import static org.swasth.common.utils.Constants.*;
+import static org..common.response.ResponseMessage.*;
+import static org..common.utils.Constants.*;
 
 @Component
 public class HCXValidationFilter extends AbstractGatewayFilterFactory<HCXValidationFilter.Config> {

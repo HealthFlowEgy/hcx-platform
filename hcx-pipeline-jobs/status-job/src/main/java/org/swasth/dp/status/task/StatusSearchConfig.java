@@ -1,7 +1,7 @@
-package org.swasth.dp.status.task;
+package org..dp.status.task;
 
 import com.typesafe.config.Config;
-import org.swasth.dp.core.job.BaseJobConfig;
+import org..dp.core.job.BaseJobConfig;
 
 public class StatusSearchConfig extends BaseJobConfig {
 

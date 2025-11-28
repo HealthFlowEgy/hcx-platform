@@ -1,4 +1,4 @@
-package org.swasth.common.utils;
+package org..common.utils;
 
 import lombok.experimental.UtilityClass;
 

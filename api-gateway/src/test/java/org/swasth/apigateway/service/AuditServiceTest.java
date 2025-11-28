@@ -1,13 +1,13 @@
-package org.swasth.apigateway.service;
+package org..apigateway.service;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ActiveProfiles;
-import org.swasth.apigateway.models.BaseRequest;
-import org.swasth.auditindexer.function.AuditIndexer;
-import org.swasth.common.helpers.EventGenerator;
+import org..apigateway.models.BaseRequest;
+import org..auditindexer.function.AuditIndexer;
+import org..common.helpers.EventGenerator;
 
 import java.util.Collections;
 import java.util.HashMap;

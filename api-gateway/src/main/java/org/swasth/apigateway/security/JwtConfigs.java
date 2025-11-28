@@ -1,4 +1,4 @@
-package org.swasth.apigateway.security;
+package org..apigateway.security;
 
 import lombok.Getter;
 import lombok.Setter;

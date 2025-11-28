@@ -1,4 +1,4 @@
-package org.swasth.common.exception;
+package org..common.exception;
 
 public class AuthorizationException extends Exception {
 

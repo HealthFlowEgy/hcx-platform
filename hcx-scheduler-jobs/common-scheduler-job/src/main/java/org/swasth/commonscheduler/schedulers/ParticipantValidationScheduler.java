@@ -1,4 +1,4 @@
-package org.swasth.commonscheduler.schedulers;
+package org..commonscheduler.schedulers;
 
 
 import org.slf4j.Logger;
@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import org.swasth.common.service.RegistryService;
-import org.swasth.common.utils.Constants;
-import org.swasth.common.utils.NotificationUtils;
+import org..common.service.RegistryService;
+import org..common.utils.Constants;
+import org..common.utils.NotificationUtils;
 
 import java.util.*;
 import java.util.stream.Collectors;

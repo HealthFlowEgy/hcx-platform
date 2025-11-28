@@ -1,4 +1,4 @@
-package org.swasth.hcx.config;
+package org..hcx.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,11 +1,11 @@
-package org.swasth.common.utils;
+package org..common.utils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.experimental.UtilityClass;
 
 import java.util.*;
 
-import static org.swasth.common.utils.Constants.*;
+import static org..common.utils.Constants.*;
 
 @UtilityClass
 public class PayloadUtils {

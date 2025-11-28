@@ -1,10 +1,10 @@
-package org.swasth.dp.communication.functions;
+package org..dp.communication.functions;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.swasth.dp.communication.task.CommunicationConfig;
-import org.swasth.dp.core.function.BaseDispatcherFunction;
-import org.swasth.dp.core.function.ValidationResult;
+import org..dp.communication.task.CommunicationConfig;
+import org..dp.core.function.BaseDispatcherFunction;
+import org..dp.core.function.ValidationResult;
 
 import java.util.Map;
 

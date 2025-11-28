@@ -1,4 +1,4 @@
-package org.swasth.hcx.service;
+package org..hcx.service;
 
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
@@ -7,27 +7,27 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.swasth.auditindexer.function.AuditIndexer;
-import org.swasth.common.dto.NotificationListRequest;
-import org.swasth.common.dto.Request;
-import org.swasth.common.dto.Response;
-import org.swasth.common.dto.Subscription;
-import org.swasth.common.exception.ClientException;
-import org.swasth.common.exception.ErrorCodes;
-import org.swasth.common.helpers.EventGenerator;
-import org.swasth.common.utils.Constants;
-import org.swasth.common.utils.NotificationUtils;
-import org.swasth.hcx.handlers.EventHandler;
-import org.swasth.kafka.client.IEventService;
-import org.swasth.postgresql.IDatabaseService;
+import org..auditindexer.function.AuditIndexer;
+import org..common.dto.NotificationListRequest;
+import org..common.dto.Request;
+import org..common.dto.Response;
+import org..common.dto.Subscription;
+import org..common.exception.ClientException;
+import org..common.exception.ErrorCodes;
+import org..common.helpers.EventGenerator;
+import org..common.utils.Constants;
+import org..common.utils.NotificationUtils;
+import org..hcx.handlers.EventHandler;
+import org..kafka.client.IEventService;
+import org..postgresql.IDatabaseService;
 
 import java.sql.ResultSet;
 import java.text.MessageFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static org.swasth.common.response.ResponseMessage.*;
-import static org.swasth.common.utils.Constants.*;
+import static org..common.response.ResponseMessage.*;
+import static org..common.utils.Constants.*;
 
 @Service
 public class NotificationService {

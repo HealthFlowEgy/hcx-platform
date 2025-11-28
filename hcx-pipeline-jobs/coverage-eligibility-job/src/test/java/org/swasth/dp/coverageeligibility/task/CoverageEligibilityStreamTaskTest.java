@@ -1,4 +1,4 @@
-package org.swasth.dp.coverageeligibility.task;
+package org..dp.coverageeligibility.task;
 
 import com.google.gson.Gson;
 import com.typesafe.config.Config;
@@ -11,11 +11,11 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Test;
-import org.swasth.dp.core.job.BaseJobConfig;
-import org.swasth.dp.core.job.FlinkKafkaConnector;
-import org.swasth.dp.coverageeligiblity.task.CoverageEligibilityConfig;
-import org.swasth.dp.coverageeligiblity.task.CoverageEligibilityStreamTask;
-import org.swasth.fixture.EventFixture;
+import org..dp.core.job.BaseJobConfig;
+import org..dp.core.job.FlinkKafkaConnector;
+import org..dp.coverageeligiblity.task.CoverageEligibilityConfig;
+import org..dp.coverageeligiblity.task.CoverageEligibilityStreamTask;
+import org..fixture.EventFixture;
 
 import java.util.*;
 

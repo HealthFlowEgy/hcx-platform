@@ -1,8 +1,8 @@
-package org.swasth.dp.preauth.task;
+package org..dp.preauth.task;
 
 
 import com.typesafe.config.Config;
-import org.swasth.dp.core.job.BaseJobConfig;
+import org..dp.core.job.BaseJobConfig;
 
 public class PreauthConfig extends BaseJobConfig {
 

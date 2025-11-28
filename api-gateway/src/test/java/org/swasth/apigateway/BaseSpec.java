@@ -1,4 +1,4 @@
-package org.swasth.apigateway;
+package org..apigateway;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import okhttp3.mockwebserver.MockWebServer;
@@ -12,20 +12,20 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.reactive.server.EntityExchangeResult;
 import org.springframework.test.web.reactive.server.WebTestClient;
-import org.swasth.apigateway.config.GenericConfiguration;
-import org.swasth.apigateway.service.AuditService;
-import org.swasth.apigateway.service.RegistryService;
-import org.swasth.auditindexer.function.AuditIndexer;
-import org.swasth.common.utils.Constants;
-import org.swasth.common.utils.JSONUtils;
-import org.swasth.common.utils.JWTUtils;
-import org.swasth.redis.cache.RedisCache;
+import org..apigateway.config.GenericConfiguration;
+import org..apigateway.service.AuditService;
+import org..apigateway.service.RegistryService;
+import org..auditindexer.function.AuditIndexer;
+import org..common.utils.Constants;
+import org..common.utils.JSONUtils;
+import org..common.utils.JWTUtils;
+import org..redis.cache.RedisCache;
 
 import java.io.IOException;
 import java.time.Duration;
 import java.util.*;
 
-import static org.swasth.common.utils.Constants.*;
+import static org..common.utils.Constants.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("test")

@@ -1,6 +1,6 @@
-package org.swasth.postgresql;
+package org..postgresql;
 
-import org.swasth.common.exception.ClientException;
+import org..common.exception.ClientException;
 
 import java.sql.*;
 

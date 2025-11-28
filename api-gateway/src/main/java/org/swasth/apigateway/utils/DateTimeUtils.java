@@ -1,12 +1,12 @@
-package org.swasth.apigateway.utils;
+package org..apigateway.utils;
 
 import lombok.experimental.UtilityClass;
-import org.swasth.apigateway.exception.ClientException;
-import org.swasth.apigateway.exception.ErrorCodes;
+import org..apigateway.exception.ClientException;
+import org..apigateway.exception.ErrorCodes;
 import org.joda.time.DateTime;
 
 import java.text.MessageFormat;
-import static org.swasth.common.response.ResponseMessage.INVALID_TIMESTAMP_MSG;
+import static org..common.response.ResponseMessage.INVALID_TIMESTAMP_MSG;
 
 @UtilityClass
 public class DateTimeUtils {

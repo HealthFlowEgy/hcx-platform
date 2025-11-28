@@ -1,4 +1,4 @@
-package org.swasth.common.dto;
+package org..common.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 

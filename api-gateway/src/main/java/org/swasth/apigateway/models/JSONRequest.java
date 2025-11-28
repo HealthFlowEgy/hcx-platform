@@ -1,13 +1,13 @@
-package org.swasth.apigateway.models;
+package org..apigateway.models;
 
 import lombok.Data;
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
-import org.swasth.apigateway.exception.ClientException;
-import org.swasth.apigateway.exception.ErrorCodes;
-import org.swasth.common.utils.Constants;
-import org.swasth.common.utils.NotificationUtils;
+import org..apigateway.exception.ClientException;
+import org..apigateway.exception.ErrorCodes;
+import org..common.utils.Constants;
+import org..common.utils.NotificationUtils;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -15,8 +15,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static org.swasth.common.response.ResponseMessage.*;
-import static org.swasth.common.utils.Constants.*;
+import static org..common.response.ResponseMessage.*;
+import static org..common.utils.Constants.*;
 
 @Data
 public class JSONRequest extends BaseRequest {

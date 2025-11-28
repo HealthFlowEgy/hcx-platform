@@ -1,11 +1,11 @@
-package org.swasth.dp.payments.functions;
+package org..dp.payments.functions;
 
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.swasth.dp.core.function.BaseDispatcherFunction;
-import org.swasth.dp.core.function.ValidationResult;
-import org.swasth.dp.payments.task.PaymentsConfig;
+import org..dp.core.function.BaseDispatcherFunction;
+import org..dp.core.function.ValidationResult;
+import org..dp.payments.task.PaymentsConfig;
 
 import java.util.Map;
 

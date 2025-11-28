@@ -1,10 +1,10 @@
-package org.swasth.dp.claims.functions;
+package org..dp.claims.functions;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.swasth.dp.claims.task.ClaimsConfig;
-import org.swasth.dp.core.function.BaseDispatcherFunction;
-import org.swasth.dp.core.function.ValidationResult;
+import org..dp.claims.task.ClaimsConfig;
+import org..dp.core.function.BaseDispatcherFunction;
+import org..dp.core.function.ValidationResult;
 
 import java.util.Map;
 

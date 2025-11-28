@@ -1,6 +1,6 @@
-package org.swasth.apigateway.models;
+package org..apigateway.models;
 
-import org.swasth.apigateway.exception.ErrorCodes;
+import org..apigateway.exception.ErrorCodes;
 import lombok.Data;
 
 @Data

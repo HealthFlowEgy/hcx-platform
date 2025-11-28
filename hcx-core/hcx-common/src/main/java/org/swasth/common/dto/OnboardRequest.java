@@ -1,12 +1,12 @@
-package org.swasth.common.dto;
+package org..common.dto;
 
-import org.swasth.common.utils.JSONUtils;
+import org..common.utils.JSONUtils;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.swasth.common.utils.Constants.*;
+import static org..common.utils.Constants.*;
 
 public class OnboardRequest {
 

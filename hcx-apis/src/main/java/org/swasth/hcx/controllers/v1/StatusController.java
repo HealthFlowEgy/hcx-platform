@@ -1,4 +1,4 @@
-package org.swasth.hcx.controllers.v1;
+package org..hcx.controllers.v1;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -7,23 +7,23 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.swasth.common.dto.AuditSearchRequest;
-import org.swasth.common.dto.Request;
-import org.swasth.common.dto.Response;
-import org.swasth.common.dto.StatusResponse;
-import org.swasth.common.exception.ClientException;
-import org.swasth.common.utils.Constants;
-import org.swasth.common.utils.JSONUtils;
-import org.swasth.hcx.controllers.BaseController;
+import org..common.dto.AuditSearchRequest;
+import org..common.dto.Request;
+import org..common.dto.Response;
+import org..common.dto.StatusResponse;
+import org..common.exception.ClientException;
+import org..common.utils.Constants;
+import org..common.utils.JSONUtils;
+import org..hcx.controllers.BaseController;
 
 import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.swasth.common.response.ResponseMessage.CORRELATION_ID_MISSING;
-import static org.swasth.common.response.ResponseMessage.INVALID_STATUS_SEARCH_ENTITY;
-import static org.swasth.common.utils.Constants.*;
+import static org..common.response.ResponseMessage.CORRELATION_ID_MISSING;
+import static org..common.response.ResponseMessage.INVALID_STATUS_SEARCH_ENTITY;
+import static org..common.utils.Constants.*;
 
 @RestController()
 @RequestMapping(Constants.VERSION_PREFIX)

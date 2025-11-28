@@ -1,4 +1,4 @@
-package org.swasth.hcx.service;
+package org..hcx.service;
 
 import kong.unirest.HttpResponse;
 import org.apache.commons.validator.routines.EmailValidator;
@@ -9,17 +9,17 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.swasth.ICloudService;
-import org.swasth.common.dto.ParticipantResponse;
-import org.swasth.common.dto.Sponsor;
-import org.swasth.common.exception.*;
-import org.swasth.common.helpers.EventGenerator;
-import org.swasth.common.utils.HttpUtils;
-import org.swasth.common.utils.JSONUtils;
-import org.swasth.common.utils.JWTUtils;
-import org.swasth.hcx.handlers.EventHandler;
-import org.swasth.postgresql.IDatabaseService;
-import org.swasth.redis.cache.RedisCache;
+import org..ICloudService;
+import org..common.dto.ParticipantResponse;
+import org..common.dto.Sponsor;
+import org..common.exception.*;
+import org..common.helpers.EventGenerator;
+import org..common.utils.HttpUtils;
+import org..common.utils.JSONUtils;
+import org..common.utils.JWTUtils;
+import org..hcx.handlers.EventHandler;
+import org..postgresql.IDatabaseService;
+import org..redis.cache.RedisCache;
 
 import java.io.IOException;
 import java.security.cert.CertificateException;
@@ -27,8 +27,8 @@ import java.sql.ResultSet;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static org.swasth.common.response.ResponseMessage.*;
-import static org.swasth.common.utils.Constants.*;
+import static org..common.response.ResponseMessage.*;
+import static org..common.utils.Constants.*;
 
 @Service
 public class ParticipantService {

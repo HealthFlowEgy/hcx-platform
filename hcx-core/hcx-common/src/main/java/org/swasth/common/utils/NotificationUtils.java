@@ -1,11 +1,11 @@
-package org.swasth.common.utils;
+package org..common.utils;
 
 import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static org.swasth.common.utils.Constants.TOPIC_CODE;
+import static org..common.utils.Constants.TOPIC_CODE;
 
 public class NotificationUtils {
 

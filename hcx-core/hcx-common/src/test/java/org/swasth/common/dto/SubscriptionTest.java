@@ -1,8 +1,8 @@
-package org.swasth.common.dto;
+package org..common.dto;
 
 import org.junit.Test;
 import org.mockito.Mockito;
-import org.swasth.common.utils.Constants;
+import org..common.utils.Constants;
 
 import static org.junit.Assert.*;
 

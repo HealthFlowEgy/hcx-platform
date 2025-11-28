@@ -1,7 +1,7 @@
-package org.swasth.dp.payments.task;
+package org..dp.payments.task;
 
 import com.typesafe.config.Config;
-import org.swasth.dp.core.job.BaseJobConfig;
+import org..dp.core.job.BaseJobConfig;
 
 public class PaymentsConfig extends BaseJobConfig {
 

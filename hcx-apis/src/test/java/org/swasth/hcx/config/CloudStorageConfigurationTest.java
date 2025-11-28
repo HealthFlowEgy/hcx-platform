@@ -1,4 +1,4 @@
-package org.swasth.hcx.config;
+package org..hcx.config;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.runner.ApplicationContextRunner;

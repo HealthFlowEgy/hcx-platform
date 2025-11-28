@@ -1,10 +1,10 @@
-package org.swasth.hcx.controller;
+package org..hcx.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.swasth.hcx.service.HcxIntegrationService;
+import org..hcx.service.HcxIntegrationService;
 
 import java.util.Map;
 

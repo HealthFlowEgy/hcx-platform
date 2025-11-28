@@ -1,7 +1,7 @@
-package org.swasth.dp.predetermination.task;
+package org..dp.predetermination.task;
 
 import com.typesafe.config.Config;
-import org.swasth.dp.core.job.BaseJobConfig;
+import org..dp.core.job.BaseJobConfig;
 
 public class PredeterminationConfig extends BaseJobConfig {
 

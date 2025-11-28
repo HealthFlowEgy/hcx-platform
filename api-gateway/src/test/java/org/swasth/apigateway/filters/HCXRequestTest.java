@@ -1,14 +1,14 @@
-package org.swasth.apigateway.filters;
+package org..apigateway.filters;
 
 import okhttp3.Response;
 import okhttp3.mockwebserver.MockResponse;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.http.HttpStatus;
-import org.swasth.apigateway.BaseSpec;
-import org.swasth.apigateway.exception.ErrorCodes;
-import org.swasth.common.response.ResponseMessage;
-import org.swasth.common.utils.Constants;
+import org..apigateway.BaseSpec;
+import org..apigateway.exception.ErrorCodes;
+import org..common.response.ResponseMessage;
+import org..common.utils.Constants;
 
 import java.util.*;
 
@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.swasth.common.response.ResponseMessage.*;
+import static org..common.response.ResponseMessage.*;
 
 class HCXRequestTest extends BaseSpec {
 

@@ -1,16 +1,16 @@
-package org.swasth.common.dto;
+package org..common.dto;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.Test;
 import org.mockito.Mockito;
-import org.swasth.common.exception.ErrorCodes;
-import org.swasth.common.utils.Constants;
+import org..common.exception.ErrorCodes;
+import org..common.utils.Constants;
 
 import java.util.*;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.swasth.common.utils.Constants.*;
+import static org..common.utils.Constants.*;
 
 public class ResponseTest {
 

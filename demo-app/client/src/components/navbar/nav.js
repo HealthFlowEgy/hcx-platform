@@ -11,7 +11,7 @@ const Nav = props => {
                         src={logo}
                         height="40"
                         className="d-inline-block"
-                    /> &nbsp; {'Swasth HCX POC Application'}
+                    /> &nbsp; {' HCX POC Application'}
                 </Navbar.Brand>
             </Container>
         </Navbar>

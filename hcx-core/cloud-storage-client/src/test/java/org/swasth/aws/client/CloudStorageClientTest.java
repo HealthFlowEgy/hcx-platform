@@ -1,7 +1,7 @@
-//package org.swasth.aws.client;
+//package org..aws.client;
 //
 //import org.junit.Test;
-//import org.swasth.CloudStorageClient;
+//import org..CloudStorageClient;
 //
 //import static org.junit.Assert.assertFalse;
 //import static org.junit.Assert.assertTrue;

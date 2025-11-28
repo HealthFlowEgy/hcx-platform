@@ -1,4 +1,4 @@
-package org.swasth.dp.retry.functions;
+package org..dp.retry.functions;
 
 import com.google.gson.Gson;
 import com.typesafe.config.Config;
@@ -7,9 +7,9 @@ import org.apache.flink.streaming.runtime.streamrecord.StreamRecord;
 import org.apache.flink.streaming.util.OneInputStreamOperatorTestHarness;
 import org.apache.flink.streaming.util.ProcessFunctionTestHarnesses;
 import org.junit.Test;
-import org.swasth.dp.core.util.JSONUtil;
-import org.swasth.dp.retry.task.RetryConfig;
-import org.swasth.fixture.EventFixture;
+import org..dp.core.util.JSONUtil;
+import org..dp.retry.task.RetryConfig;
+import org..fixture.EventFixture;
 
 import java.util.HashMap;
 import java.util.Map;

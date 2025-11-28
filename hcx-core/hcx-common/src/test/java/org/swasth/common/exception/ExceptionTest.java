@@ -1,7 +1,7 @@
-package org.swasth.common.exception;
+package org..common.exception;
 
 import org.junit.Test;
-import org.swasth.common.exception.ErrorCodes;
+import org..common.exception.ErrorCodes;
 
 import static org.junit.Assert.assertEquals;
 

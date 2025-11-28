@@ -1,7 +1,7 @@
-package org.swasth.dp.communication.task;
+package org..dp.communication.task;
 
 import com.typesafe.config.Config;
-import org.swasth.dp.core.job.BaseJobConfig;
+import org..dp.core.job.BaseJobConfig;
 
 public class CommunicationConfig extends BaseJobConfig {
 

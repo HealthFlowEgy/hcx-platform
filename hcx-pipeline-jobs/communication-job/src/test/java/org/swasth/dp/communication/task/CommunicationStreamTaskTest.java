@@ -1,4 +1,4 @@
-package org.swasth.dp.communication.task;
+package org..dp.communication.task;
 
 import com.google.gson.Gson;
 import com.typesafe.config.Config;
@@ -8,9 +8,9 @@ import org.apache.flink.streaming.api.functions.sink.SinkFunction;
 import org.apache.flink.streaming.api.functions.source.SourceFunction;
 import org.apache.flink.test.util.MiniClusterWithClientResource;
 import org.junit.*;
-import org.swasth.dp.core.job.BaseJobConfig;
-import org.swasth.dp.core.job.FlinkKafkaConnector;
-import org.swasth.fixture.EventFixture;
+import org..dp.core.job.BaseJobConfig;
+import org..dp.core.job.FlinkKafkaConnector;
+import org..fixture.EventFixture;
 
 import java.util.*;
 

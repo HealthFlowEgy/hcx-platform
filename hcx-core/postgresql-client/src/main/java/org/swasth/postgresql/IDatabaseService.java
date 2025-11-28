@@ -1,4 +1,4 @@
-package org.swasth.postgresql;
+package org..postgresql;
 
 public interface IDatabaseService {
 

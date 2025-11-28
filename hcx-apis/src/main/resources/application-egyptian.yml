@@ -61,9 +61,9 @@ hcx-protocol:
 # Logging Configuration
 logging:
   level:
-    org.swasth.hcx: DEBUG
-    org.swasth.hcx.service.HcxIntegrationService: DEBUG
-    org.swasth.hcx.controller.EgyptianHcxController: DEBUG
+    org..hcx: DEBUG
+    org..hcx.service.HcxIntegrationService: DEBUG
+    org..hcx.controller.EgyptianHcxController: DEBUG
   
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level [%X{correlationId}] %logger{36} - %msg%n"

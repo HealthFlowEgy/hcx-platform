@@ -1,13 +1,13 @@
-package org.swasth.apigateway.config;
+package org..apigateway.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.swasth.auditindexer.function.AuditIndexer;
-import org.swasth.common.helpers.EventGenerator;
-import org.swasth.common.utils.JWTUtils;
-import org.swasth.common.utils.NotificationUtils;
-import org.swasth.redis.cache.RedisCache;
+import org..auditindexer.function.AuditIndexer;
+import org..common.helpers.EventGenerator;
+import org..common.utils.JWTUtils;
+import org..common.utils.NotificationUtils;
+import org..redis.cache.RedisCache;
 
 import java.io.IOException;
 

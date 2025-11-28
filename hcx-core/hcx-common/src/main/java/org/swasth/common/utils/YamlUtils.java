@@ -1,4 +1,4 @@
-package org.swasth.common.utils;
+package org..common.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;

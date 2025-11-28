@@ -1,12 +1,12 @@
-package org.swasth.hcx.controllers.v1;
+package org..hcx.controllers.v1;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MvcResult;
-import org.swasth.common.utils.Constants;
-import org.swasth.common.utils.JSONUtils;
-import org.swasth.hcx.controllers.BaseSpec;
+import org..common.utils.Constants;
+import org..common.utils.JSONUtils;
+import org..hcx.controllers.BaseSpec;
 
 import java.util.Arrays;
 import java.util.List;

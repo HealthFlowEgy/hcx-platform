@@ -1,4 +1,4 @@
-package org.swasth.apigateway.service;
+package org..apigateway.service;
 
 import ai.grakn.redismock.RedisServer;
 import okhttp3.mockwebserver.MockResponse;
@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ActiveProfiles;
-import org.swasth.redis.cache.RedisCache;
+import org..redis.cache.RedisCache;
 
 import java.io.IOException;
 import java.net.InetAddress;

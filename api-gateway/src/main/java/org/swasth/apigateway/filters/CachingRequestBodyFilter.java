@@ -1,4 +1,4 @@
-package org.swasth.apigateway.filters;
+package org..apigateway.filters;
 
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;

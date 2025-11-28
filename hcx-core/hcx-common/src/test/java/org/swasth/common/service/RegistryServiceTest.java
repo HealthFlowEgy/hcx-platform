@@ -1,7 +1,7 @@
-package org.swasth.common.service;
+package org..common.service;
 
 import org.junit.Test;
-import org.swasth.common.exception.ServerException;
+import org..common.exception.ServerException;
 
 
 public class RegistryServiceTest {

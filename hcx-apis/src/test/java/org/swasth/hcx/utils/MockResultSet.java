@@ -1,4 +1,4 @@
-package org.swasth.hcx.utils;
+package org..hcx.utils;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

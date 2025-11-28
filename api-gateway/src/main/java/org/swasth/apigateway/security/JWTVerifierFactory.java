@@ -1,4 +1,4 @@
-package org.swasth.apigateway.security;
+package org..apigateway.security;
 
 import com.auth0.jwk.Jwk;
 import com.auth0.jwk.JwkException;

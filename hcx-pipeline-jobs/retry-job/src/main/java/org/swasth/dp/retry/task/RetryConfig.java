@@ -1,7 +1,7 @@
-package org.swasth.dp.retry.task;
+package org..dp.retry.task;
 
 import com.typesafe.config.Config;
-import org.swasth.dp.core.job.BaseJobConfig;
+import org..dp.core.job.BaseJobConfig;
 
 public class RetryConfig extends BaseJobConfig {
 

@@ -1,4 +1,4 @@
-package org.swasth.common.utils;
+package org..common.utils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.Test;
@@ -7,8 +7,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.Assert.*;
-import static org.swasth.common.utils.Constants.RECIPIENTDETAILS;
-import static org.swasth.common.utils.Constants.SENDERDETAILS;
+import static org..common.utils.Constants.RECIPIENTDETAILS;
+import static org..common.utils.Constants.SENDERDETAILS;
 
 
 public class PayloadUtilsTest {

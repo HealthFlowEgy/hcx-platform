@@ -1,11 +1,11 @@
-package org.swasth.apigateway.filters;
+package org..apigateway.filters;
 
 import okhttp3.mockwebserver.MockResponse;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.http.HttpStatus;
-import org.swasth.apigateway.BaseSpec;
-import org.swasth.common.utils.Constants;
+import org..apigateway.BaseSpec;
+import org..common.utils.Constants;
 import java.util.Collections;
 import java.util.Map;
 

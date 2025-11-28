@@ -1,4 +1,4 @@
-package org.swasth.hcx.service;
+package org..hcx.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;

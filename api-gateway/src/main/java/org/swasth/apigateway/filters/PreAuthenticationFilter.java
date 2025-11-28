@@ -1,8 +1,8 @@
-package org.swasth.apigateway.filters;
+package org..apigateway.filters;
 
-import org.swasth.apigateway.constants.FilterOrder;
-import org.swasth.apigateway.models.Acl;
-import org.swasth.apigateway.utils.Utils;
+import org..apigateway.constants.FilterOrder;
+import org..apigateway.models.Acl;
+import org..apigateway.utils.Utils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
@@ -10,7 +10,7 @@ import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
-import org.swasth.common.utils.Constants;
+import org..common.utils.Constants;
 import reactor.core.publisher.Mono;
 import java.util.Map;
 

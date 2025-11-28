@@ -1,4 +1,4 @@
-package org.swasth.kafka.client;
+package org..kafka.client;
 
 public interface IEventService {
 

@@ -1,8 +1,8 @@
-package org.swasth.dp.notification.trigger.task;
+package org..dp.notification.trigger.task;
 
 import com.typesafe.config.Config;
 import org.apache.flink.util.OutputTag;
-import org.swasth.dp.core.job.BaseJobConfig;
+import org..dp.core.job.BaseJobConfig;
 
 import java.util.List;
 import java.util.Map;

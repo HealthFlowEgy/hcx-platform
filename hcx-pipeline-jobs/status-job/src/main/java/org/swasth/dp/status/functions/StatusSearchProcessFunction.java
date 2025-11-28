@@ -1,12 +1,12 @@
-package org.swasth.dp.status.functions;
+package org..dp.status.functions;
 
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.swasth.dp.core.function.BaseDispatcherFunction;
-import org.swasth.dp.core.function.ValidationResult;
-import org.swasth.dp.core.util.PostgresConnect;
-import org.swasth.dp.status.task.StatusSearchConfig;
+import org..dp.core.function.BaseDispatcherFunction;
+import org..dp.core.function.ValidationResult;
+import org..dp.core.util.PostgresConnect;
+import org..dp.status.task.StatusSearchConfig;
 
 import java.util.Map;
 

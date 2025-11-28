@@ -1,4 +1,4 @@
-package org.swasth.hcx.controllers.v1;
+package org..hcx.controllers.v1;
 
 import org.elasticsearch.client.RestHighLevelClient;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,11 +16,11 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
-import org.swasth.common.dto.AuditSearchRequest;
-import org.swasth.common.utils.Constants;
-import org.swasth.common.utils.JSONUtils;
-import org.swasth.hcx.config.GenericConfiguration;
-import org.swasth.hcx.service.AuditService;
+import org..common.dto.AuditSearchRequest;
+import org..common.utils.Constants;
+import org..common.utils.JSONUtils;
+import org..hcx.config.GenericConfiguration;
+import org..hcx.service.AuditService;
 
 import java.util.Collections;
 import java.util.HashMap;

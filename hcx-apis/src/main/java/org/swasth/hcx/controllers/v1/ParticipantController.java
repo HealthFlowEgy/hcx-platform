@@ -1,4 +1,4 @@
-package org.swasth.hcx.controllers.v1;
+package org..hcx.controllers.v1;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -6,18 +6,18 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.swasth.common.dto.Response;
-import org.swasth.common.exception.ClientException;
-import org.swasth.common.exception.ErrorCodes;
-import org.swasth.common.utils.Constants;
-import org.swasth.hcx.controllers.BaseController;
-import org.swasth.hcx.models.Participant;
-import org.swasth.hcx.service.ParticipantService;
+import org..common.dto.Response;
+import org..common.exception.ClientException;
+import org..common.exception.ErrorCodes;
+import org..common.utils.Constants;
+import org..hcx.controllers.BaseController;
+import org..hcx.models.Participant;
+import org..hcx.service.ParticipantService;
 
 import java.util.Map;
 
-import static org.swasth.common.response.ResponseMessage.PARTICIPANT_CODE_MSG;
-import static org.swasth.common.utils.Constants.*;
+import static org..common.response.ResponseMessage.PARTICIPANT_CODE_MSG;
+import static org..common.utils.Constants.*;
 
 @RestController()
 @RequestMapping(Constants.VERSION_PREFIX)

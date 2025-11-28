@@ -1,4 +1,4 @@
-package org.swasth.dp.coverageeligibility.functions;
+package org..dp.coverageeligibility.functions;
 
 import com.google.gson.Gson;
 import com.typesafe.config.Config;
@@ -7,9 +7,9 @@ import org.apache.flink.streaming.runtime.streamrecord.StreamRecord;
 import org.apache.flink.streaming.util.OneInputStreamOperatorTestHarness;
 import org.apache.flink.streaming.util.ProcessFunctionTestHarnesses;
 import org.junit.Test;
-import org.swasth.dp.coverageeligiblity.functions.CoverageEligibilityProcessFunction;
-import org.swasth.dp.coverageeligiblity.task.CoverageEligibilityConfig;
-import org.swasth.fixture.EventFixture;
+import org..dp.coverageeligiblity.functions.CoverageEligibilityProcessFunction;
+import org..dp.coverageeligiblity.task.CoverageEligibilityConfig;
+import org..fixture.EventFixture;
 
 import java.util.HashMap;
 import java.util.Map;

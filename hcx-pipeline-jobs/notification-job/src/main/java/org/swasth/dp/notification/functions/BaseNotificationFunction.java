@@ -1,15 +1,15 @@
-package org.swasth.dp.notification.functions;
+package org..dp.notification.functions;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.StringSubstitutor;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.streaming.api.functions.ProcessFunction;
 import org.joda.time.DateTime;
-import org.swasth.dp.core.function.ErrorResponse;
-import org.swasth.dp.core.service.AuditService;
-import org.swasth.dp.core.service.RegistryService;
-import org.swasth.dp.core.util.*;
-import org.swasth.dp.notification.task.NotificationConfig;
+import org..dp.core.function.ErrorResponse;
+import org..dp.core.service.AuditService;
+import org..dp.core.service.RegistryService;
+import org..dp.core.util.*;
+import org..dp.notification.task.NotificationConfig;
 
 import java.util.*;
 import java.util.stream.Collectors;

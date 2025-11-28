@@ -1,14 +1,14 @@
-package org.swasth.hcx.manager;
+package org..hcx.manager;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.swasth.common.dto.Response;
-import org.swasth.hcx.managers.HealthCheckManager;
-import org.swasth.kafka.client.IEventService;
-import org.swasth.postgresql.IDatabaseService;
-import org.swasth.redis.cache.RedisCache;
+import org..common.dto.Response;
+import org..hcx.managers.HealthCheckManager;
+import org..kafka.client.IEventService;
+import org..postgresql.IDatabaseService;
+import org..redis.cache.RedisCache;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;

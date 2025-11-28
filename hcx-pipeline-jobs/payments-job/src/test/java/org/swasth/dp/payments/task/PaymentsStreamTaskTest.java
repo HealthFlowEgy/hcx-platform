@@ -1,4 +1,4 @@
-package org.swasth.dp.payments.task;
+package org..dp.payments.task;
 
 import com.google.gson.Gson;
 import com.typesafe.config.Config;
@@ -11,9 +11,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Test;
-import org.swasth.dp.core.job.BaseJobConfig;
-import org.swasth.dp.core.job.FlinkKafkaConnector;
-import org.swasth.fixture.EventFixture;
+import org..dp.core.job.BaseJobConfig;
+import org..dp.core.job.FlinkKafkaConnector;
+import org..fixture.EventFixture;
 
 import java.util.*;
 

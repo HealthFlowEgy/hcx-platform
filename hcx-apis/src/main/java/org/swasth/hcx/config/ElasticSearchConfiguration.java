@@ -1,4 +1,4 @@
-package org.swasth.hcx.config;
+package org..hcx.config;
 
 
 
@@ -13,8 +13,8 @@ import org.springframework.data.elasticsearch.config.AbstractElasticsearchConfig
 import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
 
 @Configuration
-@EnableElasticsearchRepositories(basePackages = "org.swasth.hcx.repository")
-//@ComponentScan(basePackages = {"org.swasth.hcx"})
+@EnableElasticsearchRepositories(basePackages = "org..hcx.repository")
+//@ComponentScan(basePackages = {"org..hcx"})
 public class ElasticSearchConfiguration extends AbstractElasticsearchConfiguration {
 
     @Value("${es.host}")

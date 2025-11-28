@@ -1,4 +1,4 @@
-package org.swasth.hcx.controllers;
+package org..hcx.controllers;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -8,8 +8,8 @@ import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.swasth.common.dto.Response;
-import org.swasth.common.utils.Constants;
+import org..common.dto.Response;
+import org..common.utils.Constants;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;

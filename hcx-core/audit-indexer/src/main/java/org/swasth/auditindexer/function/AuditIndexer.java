@@ -1,8 +1,8 @@
-package org.swasth.auditindexer.function;
+package org..auditindexer.function;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import org.swasth.auditindexer.utils.ElasticSearchUtil;
-import org.swasth.common.utils.JSONUtils;
+import org..auditindexer.utils.ElasticSearchUtil;
+import org..common.utils.JSONUtils;
 
 import java.io.InputStream;
 import java.util.*;

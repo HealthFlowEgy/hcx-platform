@@ -1,20 +1,20 @@
-package org.swasth.commonscheduler.schedulers;
+package org..commonscheduler.schedulers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
-import org.swasth.common.exception.ClientException;
-import org.swasth.common.helpers.EventGenerator;
-import org.swasth.kafka.client.KafkaClient;
-import org.swasth.postgresql.PostgreSQLClient;
+import org..common.exception.ClientException;
+import org..common.helpers.EventGenerator;
+import org..kafka.client.KafkaClient;
+import org..postgresql.PostgreSQLClient;
 
 import javax.annotation.PostConstruct;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.swasth.common.utils.Constants.*;
+import static org..common.utils.Constants.*;
 
 @Component
 public class BaseScheduler {

@@ -1,10 +1,10 @@
-package org.swasth.common.dto;
+package org..common.dto;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.Test;
-import org.swasth.common.exception.ClientException;
-import org.swasth.common.utils.Constants;
-import org.swasth.common.utils.JSONUtils;
+import org..common.exception.ClientException;
+import org..common.utils.Constants;
+import org..common.utils.JSONUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import static org.junit.Assert.*;
-import static org.swasth.common.utils.Constants.*;
+import static org..common.utils.Constants.*;
 
  public class RequestTest {
 

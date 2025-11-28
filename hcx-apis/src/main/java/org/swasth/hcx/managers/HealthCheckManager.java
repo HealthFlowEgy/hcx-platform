@@ -1,12 +1,12 @@
-package org.swasth.hcx.managers;
+package org..hcx.managers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.swasth.common.dto.Response;
-import org.swasth.common.utils.Constants;
-import org.swasth.kafka.client.IEventService;
-import org.swasth.postgresql.IDatabaseService;
-import org.swasth.redis.cache.RedisCache;
+import org..common.dto.Response;
+import org..common.utils.Constants;
+import org..kafka.client.IEventService;
+import org..postgresql.IDatabaseService;
+import org..redis.cache.RedisCache;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;

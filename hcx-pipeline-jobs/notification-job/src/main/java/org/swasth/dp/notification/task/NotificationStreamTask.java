@@ -1,4 +1,4 @@
-package org.swasth.dp.notification.task;
+package org..dp.notification.task;
 
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
@@ -9,11 +9,11 @@ import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.functions.source.SourceFunction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.swasth.dp.core.function.SubscriptionEnrichmentFunction;
-import org.swasth.dp.core.job.BaseJobConfig;
-import org.swasth.dp.core.job.FlinkKafkaConnector;
-import org.swasth.dp.core.util.FlinkUtil;
-import org.swasth.dp.notification.functions.*;
+import org..dp.core.function.SubscriptionEnrichmentFunction;
+import org..dp.core.job.BaseJobConfig;
+import org..dp.core.job.FlinkKafkaConnector;
+import org..dp.core.util.FlinkUtil;
+import org..dp.notification.functions.*;
 import scala.Option;
 import scala.Some;
 

@@ -1,4 +1,4 @@
-package org.swasth.hcx.controllers.v1;
+package org..hcx.controllers.v1;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
@@ -8,21 +8,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.swasth.common.dto.Request;
-import org.swasth.common.dto.Response;
-import org.swasth.common.dto.AuditSearchRequest;
-import org.swasth.common.exception.ClientException;
-import org.swasth.common.exception.ErrorCodes;
-import org.swasth.common.utils.Constants;
-import org.swasth.hcx.controllers.BaseController;
+import org..common.dto.Request;
+import org..common.dto.Response;
+import org..common.dto.AuditSearchRequest;
+import org..common.exception.ClientException;
+import org..common.exception.ErrorCodes;
+import org..common.utils.Constants;
+import org..hcx.controllers.BaseController;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.swasth.common.response.ResponseMessage.INVALID_CORRELATION_ID;
-import static org.swasth.common.response.ResponseMessage.INVALID_WORKFLOW_ID;
-import static org.swasth.common.utils.Constants.*;
+import static org..common.response.ResponseMessage.INVALID_CORRELATION_ID;
+import static org..common.response.ResponseMessage.INVALID_WORKFLOW_ID;
+import static org..common.utils.Constants.*;
 
 @RestController()
 @RequestMapping(Constants.VERSION_PREFIX)

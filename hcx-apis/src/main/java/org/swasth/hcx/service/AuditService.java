@@ -1,4 +1,4 @@
-package org.swasth.hcx.service;
+package org..hcx.service;
 
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.client.RequestOptions;
@@ -8,9 +8,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.swasth.common.dto.AuditSearchRequest;
-import org.swasth.common.utils.Constants;
-import org.swasth.hcx.utils.SearchUtil;
+import org..common.dto.AuditSearchRequest;
+import org..common.utils.Constants;
+import org..hcx.utils.SearchUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;

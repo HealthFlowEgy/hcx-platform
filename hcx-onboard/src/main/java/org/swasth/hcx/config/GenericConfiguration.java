@@ -1,13 +1,13 @@
-package org.swasth.hcx.config;
+package org..hcx.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
-import org.swasth.common.service.RegistryService;
-import org.swasth.common.utils.JWTUtils;
-import org.swasth.hcx.helpers.EventGenerator;
+import org..common.service.RegistryService;
+import org..common.utils.JWTUtils;
+import org..hcx.helpers.EventGenerator;
 
 
 @Configuration

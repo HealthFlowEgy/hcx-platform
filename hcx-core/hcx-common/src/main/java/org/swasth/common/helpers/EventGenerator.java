@@ -1,15 +1,15 @@
-package org.swasth.common.helpers;
+package org..common.helpers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.apache.commons.lang3.StringUtils;
-import org.swasth.common.dto.Request;
-import org.swasth.common.dto.Response;
-import org.swasth.common.utils.JSONUtils;
-import org.swasth.common.utils.JWTUtils;
+import org..common.dto.Request;
+import org..common.dto.Response;
+import org..common.utils.JSONUtils;
+import org..common.utils.JWTUtils;
 
 import java.util.*;
 
-import static org.swasth.common.utils.Constants.*;
+import static org..common.utils.Constants.*;
 
 
 public class EventGenerator {

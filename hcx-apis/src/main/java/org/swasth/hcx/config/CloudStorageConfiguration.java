@@ -1,10 +1,10 @@
-package org.swasth.hcx.config;
+package org..hcx.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.swasth.CloudStorageClient;
-import org.swasth.ICloudService;
+import org..CloudStorageClient;
+import org..ICloudService;
 
 @Configuration
 class CloudStorageConfiguration {

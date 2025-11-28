@@ -1,4 +1,4 @@
-package org.swasth.hcx.services;
+package org..hcx.services;
 
 
 import com.amazonaws.auth.AWSCredentials;

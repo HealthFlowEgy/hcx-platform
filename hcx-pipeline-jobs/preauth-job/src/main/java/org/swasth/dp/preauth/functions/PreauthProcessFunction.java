@@ -1,10 +1,10 @@
-package org.swasth.dp.preauth.functions;
+package org..dp.preauth.functions;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.swasth.dp.core.function.BaseDispatcherFunction;
-import org.swasth.dp.core.function.ValidationResult;
-import org.swasth.dp.preauth.task.PreauthConfig;
+import org..dp.core.function.BaseDispatcherFunction;
+import org..dp.core.function.ValidationResult;
+import org..dp.preauth.task.PreauthConfig;
 
 import java.util.Map;
 

@@ -1,4 +1,4 @@
-package org.swasth.apigateway.exception;
+package org..apigateway.exception;
 
 public class JWTVerificationException extends Exception {
 

@@ -1,4 +1,4 @@
-package org.swasth.apigateway.models;
+package org..apigateway.models;
 
 import lombok.Data;
 

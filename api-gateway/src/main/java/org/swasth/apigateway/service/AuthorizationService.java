@@ -1,4 +1,4 @@
-package org.swasth.apigateway.service;
+package org..apigateway.service;
 
 import org.springframework.web.server.ServerWebExchange;
 

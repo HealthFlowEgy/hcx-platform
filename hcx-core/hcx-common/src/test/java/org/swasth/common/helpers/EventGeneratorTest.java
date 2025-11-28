@@ -1,15 +1,15 @@
-package org.swasth.common.helpers;
+package org..common.helpers;
 
 
 import org.junit.Test;
-import org.swasth.common.dto.Request;
-import org.swasth.common.dto.Response;
-import org.swasth.common.utils.Constants;
+import org..common.dto.Request;
+import org..common.dto.Response;
+import org..common.utils.Constants;
 
 import java.util.*;
 
 import static org.junit.Assert.*;
-import static org.swasth.common.utils.Constants.*;
+import static org..common.utils.Constants.*;
 
 
 public class EventGeneratorTest {

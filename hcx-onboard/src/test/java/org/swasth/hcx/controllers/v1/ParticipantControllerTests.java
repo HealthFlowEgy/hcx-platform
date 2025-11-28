@@ -1,9 +1,9 @@
-package org.swasth.hcx.controllers.v1;
+package org..hcx.controllers.v1;
 
 import okhttp3.mockwebserver.MockWebServer;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.swasth.hcx.controllers.BaseSpec;
+import org..hcx.controllers.BaseSpec;
 
 import java.io.IOException;
 import java.net.InetAddress;

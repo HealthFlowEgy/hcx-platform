@@ -1,21 +1,21 @@
-package org.swasth.hcx.controllers.v1;
+package org..hcx.controllers.v1;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.swasth.common.dto.Response;
-import org.swasth.common.utils.Constants;
-import org.swasth.hcx.controllers.BaseController;
-import org.swasth.hcx.services.EmailService;
-import org.swasth.hcx.services.ParticipantService;
+import org..common.dto.Response;
+import org..common.utils.Constants;
+import org..hcx.controllers.BaseController;
+import org..hcx.services.EmailService;
+import org..hcx.services.ParticipantService;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Map;
 
-import static org.swasth.common.utils.Constants.*;
+import static org..common.utils.Constants.*;
 
 @RestController()
 @RequestMapping(Constants.VERSION_PREFIX)

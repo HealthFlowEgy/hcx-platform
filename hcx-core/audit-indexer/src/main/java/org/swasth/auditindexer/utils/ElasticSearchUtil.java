@@ -1,4 +1,4 @@
-package org.swasth.auditindexer.utils;
+package org..auditindexer.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang3.StringUtils;

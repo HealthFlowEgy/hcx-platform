@@ -1,4 +1,4 @@
-package org.swasth.dp.preauth.functions;
+package org..dp.preauth.functions;
 
 import com.google.gson.Gson;
 import com.typesafe.config.Config;
@@ -7,8 +7,8 @@ import org.apache.flink.streaming.runtime.streamrecord.StreamRecord;
 import org.apache.flink.streaming.util.OneInputStreamOperatorTestHarness;
 import org.apache.flink.streaming.util.ProcessFunctionTestHarnesses;
 import org.junit.Test;
-import org.swasth.dp.preauth.task.PreauthConfig;
-import org.swasth.fixture.EventFixture;
+import org..dp.preauth.task.PreauthConfig;
+import org..fixture.EventFixture;
 
 import java.util.HashMap;
 import java.util.Map;

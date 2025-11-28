@@ -1,10 +1,10 @@
-package org.swasth.common.utils;
+package org..common.utils;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.apache.commons.io.IOUtils;
-import org.swasth.common.exception.ClientException;
-import org.swasth.common.exception.ErrorCodes;
+import org..common.exception.ClientException;
+import org..common.exception.ErrorCodes;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -19,7 +19,7 @@ import java.security.cert.X509Certificate;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.util.*;
-import static org.swasth.common.utils.Constants.*;
+import static org..common.utils.Constants.*;
 
 public class JWTUtils {
 

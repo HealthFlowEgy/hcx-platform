@@ -1,11 +1,11 @@
-package org.swasth.common.service;
+package org..common.service;
 
 import kong.unirest.HttpResponse;
 import kong.unirest.UnirestException;
-import org.swasth.common.exception.ErrorCodes;
-import org.swasth.common.exception.ServerException;
-import org.swasth.common.utils.HttpUtils;
-import org.swasth.common.utils.JSONUtils;
+import org..common.exception.ErrorCodes;
+import org..common.exception.ServerException;
+import org..common.utils.HttpUtils;
+import org..common.utils.JSONUtils;
 
 import java.util.Collections;
 import java.util.HashMap;

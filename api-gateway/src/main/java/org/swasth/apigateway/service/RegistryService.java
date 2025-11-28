@@ -1,4 +1,4 @@
-package org.swasth.apigateway.service;
+package org..apigateway.service;
 
 import kong.unirest.HttpResponse;
 import kong.unirest.UnirestException;
@@ -7,11 +7,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.swasth.apigateway.exception.ErrorCodes;
-import org.swasth.apigateway.exception.ServerException;
-import org.swasth.common.utils.HttpUtils;
-import org.swasth.common.utils.JSONUtils;
-import org.swasth.redis.cache.RedisCache;
+import org..apigateway.exception.ErrorCodes;
+import org..apigateway.exception.ServerException;
+import org..common.utils.HttpUtils;
+import org..common.utils.JSONUtils;
+import org..redis.cache.RedisCache;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -19,8 +19,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.swasth.common.response.ResponseMessage.REGISTRY_SERVICE_ERROR;
-import static org.swasth.common.response.ResponseMessage.REGISTRY_SERVICE_FETCH_MSG;
+import static org..common.response.ResponseMessage.REGISTRY_SERVICE_ERROR;
+import static org..common.response.ResponseMessage.REGISTRY_SERVICE_FETCH_MSG;
 
 @Service
 public class RegistryService {

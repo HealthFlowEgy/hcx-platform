@@ -1,4 +1,4 @@
-package org.swasth.hcx.handlers;
+package org..hcx.handlers;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -6,19 +6,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
-import org.swasth.auditindexer.function.AuditIndexer;
-import org.swasth.common.dto.Request;
-import org.swasth.common.helpers.EventGenerator;
-import org.swasth.common.utils.Constants;
-import org.swasth.common.utils.JSONUtils;
-import org.swasth.common.utils.PayloadUtils;
-import org.swasth.kafka.client.IEventService;
-import org.swasth.postgresql.IDatabaseService;
+import org..auditindexer.function.AuditIndexer;
+import org..common.dto.Request;
+import org..common.helpers.EventGenerator;
+import org..common.utils.Constants;
+import org..common.utils.JSONUtils;
+import org..common.utils.PayloadUtils;
+import org..kafka.client.IEventService;
+import org..postgresql.IDatabaseService;
 
 import java.util.Map;
 
-import static org.swasth.common.utils.Constants.KAFKA_TOPIC_PAYLOAD;
-import static org.swasth.common.utils.Constants.QUEUED_STATUS;
+import static org..common.utils.Constants.KAFKA_TOPIC_PAYLOAD;
+import static org..common.utils.Constants.QUEUED_STATUS;
 
 @Component
 public class EventHandler {

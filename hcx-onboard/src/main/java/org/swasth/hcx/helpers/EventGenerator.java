@@ -1,11 +1,11 @@
-package org.swasth.hcx.helpers;
+package org..hcx.helpers;
 
-import org.swasth.common.utils.UUIDUtils;
+import org..common.utils.UUIDUtils;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.swasth.common.utils.Constants.*;
+import static org..common.utils.Constants.*;
 
 
 public class EventGenerator {

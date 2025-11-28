@@ -1,4 +1,4 @@
-package org.swasth.hcx.controllers.v1;
+package org..hcx.controllers.v1;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.jupiter.api.Test;
@@ -6,12 +6,12 @@ import org.mockito.Mockito;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MvcResult;
-import org.swasth.common.dto.Response;
-import org.swasth.common.exception.ClientException;
-import org.swasth.common.exception.ErrorCodes;
-import org.swasth.common.utils.JSONUtils;
-import org.swasth.hcx.controllers.BaseSpec;
-import org.swasth.hcx.utils.MockResultSet;
+import org..common.dto.Response;
+import org..common.exception.ClientException;
+import org..common.exception.ErrorCodes;
+import org..common.utils.JSONUtils;
+import org..hcx.controllers.BaseSpec;
+import org..hcx.utils.MockResultSet;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,7 +22,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.swasth.common.utils.Constants.*;
+import static org..common.utils.Constants.*;
 
 class NotificationControllerTest extends BaseSpec {
 
@@ -543,7 +543,7 @@ class NotificationControllerTest extends BaseSpec {
     }
 
     private Map<String,Object> getSubscriptionUpdateAuditLog() throws Exception {
-        return JSONUtils.deserialize("{\"eid\":\"AUDIT\",\"edata\":{\"prevStatus\":1,\"status\":0,\"props\":[\"subscription_status\",\"expiry\",\"is_delegated\"]},\"ets\":1659434908868,\"mid\":\"5ee2b9e1-ded6-4b56-afa8-3380107632e0\",\"object\":{\"id\":\"097e0185-eeb1-48f1-b2b0-b68774d02c6d\",\"type\":\"notification\"},\"cdata\":{\"action\":\"/notification/subscription/update\",\"recipient_code\":\"testpayor1.icici@swasth-hcx-dev\",\"sender_code\":\"testprovider1.apollo@swasth-hcx-dev\"}}", Map.class);
+        return JSONUtils.deserialize("{\"eid\":\"AUDIT\",\"edata\":{\"prevStatus\":1,\"status\":0,\"props\":[\"subscription_status\",\"expiry\",\"is_delegated\"]},\"ets\":1659434908868,\"mid\":\"5ee2b9e1-ded6-4b56-afa8-3380107632e0\",\"object\":{\"id\":\"097e0185-eeb1-48f1-b2b0-b68774d02c6d\",\"type\":\"notification\"},\"cdata\":{\"action\":\"/notification/subscription/update\",\"recipient_code\":\"testpayor1.icici@-hcx-dev\",\"sender_code\":\"testprovider1.apollo@-hcx-dev\"}}", Map.class);
     }
 
     @Test

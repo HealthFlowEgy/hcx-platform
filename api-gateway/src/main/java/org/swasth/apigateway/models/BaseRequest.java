@@ -1,15 +1,15 @@
-package org.swasth.apigateway.models;
+package org..apigateway.models;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import lombok.Data;
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.swasth.apigateway.exception.ClientException;
-import org.swasth.apigateway.exception.ErrorCodes;
-import org.swasth.apigateway.utils.DateTimeUtils;
-import org.swasth.common.utils.JSONUtils;
-import org.swasth.common.utils.PayloadUtils;
-import org.swasth.common.utils.UUIDUtils;
+import org..apigateway.exception.ClientException;
+import org..apigateway.exception.ErrorCodes;
+import org..apigateway.utils.DateTimeUtils;
+import org..common.utils.JSONUtils;
+import org..common.utils.PayloadUtils;
+import org..common.utils.UUIDUtils;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -18,8 +18,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static org.swasth.common.response.ResponseMessage.*;
-import static org.swasth.common.utils.Constants.*;
+import static org..common.response.ResponseMessage.*;
+import static org..common.utils.Constants.*;
 
 
 @Data

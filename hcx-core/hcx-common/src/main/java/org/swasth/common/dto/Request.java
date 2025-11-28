@@ -1,16 +1,16 @@
-package org.swasth.common.dto;
+package org..common.dto;
 
 import org.apache.commons.lang3.StringUtils;
-import org.swasth.common.exception.ClientException;
-import org.swasth.common.exception.ErrorCodes;
-import org.swasth.common.utils.Constants;
-import org.swasth.common.utils.JSONUtils;
-import org.swasth.common.utils.PayloadUtils;
-import org.swasth.common.utils.UUIDUtils;
+import org..common.exception.ClientException;
+import org..common.exception.ErrorCodes;
+import org..common.utils.Constants;
+import org..common.utils.JSONUtils;
+import org..common.utils.PayloadUtils;
+import org..common.utils.UUIDUtils;
 
 import java.util.*;
 
-import static org.swasth.common.utils.Constants.*;
+import static org..common.utils.Constants.*;
 
 public class Request {
 

@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <parent>
     <artifactId>pipeline-jobs</artifactId>
-    <groupId>org.swasth</groupId>
+    <groupId>org.</groupId>
     <version>1.0</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
@@ -42,7 +42,7 @@
               </filters>
               <transformers>
                 <transformer>
-                  <mainClass>org.swasth.dp.searchresponse.task.SearchResponseStreamTask</mainClass>
+                  <mainClass>org..dp.searchresponse.task.SearchResponseStreamTask</mainClass>
                 </transformer>
                 <transformer>
                   <resource>reference.conf</resource>
@@ -118,7 +118,7 @@
   </build>
   <dependencies>
     <dependency>
-      <groupId>org.swasth</groupId>
+      <groupId>org.</groupId>
       <artifactId>core</artifactId>
       <version>1.0.0</version>
       <type>test-jar</type>

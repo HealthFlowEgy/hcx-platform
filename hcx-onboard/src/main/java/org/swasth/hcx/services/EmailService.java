@@ -1,4 +1,4 @@
-package org.swasth.hcx.services;
+package org..hcx.services;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Async;

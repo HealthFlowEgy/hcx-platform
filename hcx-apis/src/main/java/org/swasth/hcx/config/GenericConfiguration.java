@@ -1,20 +1,20 @@
-package org.swasth.hcx.config;
+package org..hcx.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
-import org.swasth.common.helpers.EventGenerator;
-import org.swasth.common.service.RegistryService;
-import org.swasth.common.utils.JWTUtils;
-import org.swasth.common.utils.NotificationUtils;
+import org..common.helpers.EventGenerator;
+import org..common.service.RegistryService;
+import org..common.utils.JWTUtils;
+import org..common.utils.NotificationUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.swasth.common.utils.Constants.*;
+import static org..common.utils.Constants.*;
 
 @Configuration
 public class GenericConfiguration {

@@ -1,4 +1,4 @@
-package org.swasth.dp.notification.task;
+package org..dp.notification.task;
 
 import com.google.gson.Gson;
 import com.typesafe.config.Config;
@@ -10,11 +10,11 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Test;
-import org.swasth.dp.core.job.BaseJobConfig;
-import org.swasth.dp.core.job.FlinkKafkaConnector;
-import org.swasth.dp.core.service.AuditService;
-import org.swasth.dp.core.util.ElasticSearchUtil;
-import org.swasth.fixture.EventFixture;
+import org..dp.core.job.BaseJobConfig;
+import org..dp.core.job.FlinkKafkaConnector;
+import org..dp.core.service.AuditService;
+import org..dp.core.util.ElasticSearchUtil;
+import org..fixture.EventFixture;
 
 import java.util.HashMap;
 import java.util.Map;

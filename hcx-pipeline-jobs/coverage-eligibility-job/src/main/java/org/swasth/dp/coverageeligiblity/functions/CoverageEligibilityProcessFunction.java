@@ -1,10 +1,10 @@
-package org.swasth.dp.coverageeligiblity.functions;
+package org..dp.coverageeligiblity.functions;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.swasth.dp.core.function.BaseDispatcherFunction;
-import org.swasth.dp.core.function.ValidationResult;
-import org.swasth.dp.coverageeligiblity.task.CoverageEligibilityConfig;
+import org..dp.core.function.BaseDispatcherFunction;
+import org..dp.core.function.ValidationResult;
+import org..dp.coverageeligiblity.task.CoverageEligibilityConfig;
 
 import java.util.Map;
 

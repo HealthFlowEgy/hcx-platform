@@ -1,4 +1,4 @@
-package org.swasth.dp.notification.trigger.functions;
+package org..dp.notification.trigger.functions;
 
 import org.apache.commons.text.StringSubstitutor;
 import org.apache.flink.configuration.Configuration;
@@ -6,9 +6,9 @@ import org.apache.flink.streaming.api.functions.ProcessFunction;
 import org.apache.flink.util.Collector;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.swasth.dp.core.service.RegistryService;
-import org.swasth.dp.core.util.*;
-import org.swasth.dp.notification.trigger.task.NotificationTriggerConfig;
+import org..dp.core.service.RegistryService;
+import org..dp.core.util.*;
+import org..dp.notification.trigger.task.NotificationTriggerConfig;
 
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;

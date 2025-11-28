@@ -1,4 +1,4 @@
-package org.swasth.hcx.aspect;
+package org..hcx.aspect;
 
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -8,12 +8,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.swasth.common.dto.Response;
-import org.swasth.common.exception.ErrorCodes;
-import org.swasth.common.exception.ServiceUnavailbleException;
-import org.swasth.common.utils.Constants;
-import org.swasth.common.utils.JSONUtils;
-import org.swasth.hcx.managers.HealthCheckManager;
+import org..common.dto.Response;
+import org..common.exception.ErrorCodes;
+import org..common.exception.ServiceUnavailbleException;
+import org..common.utils.Constants;
+import org..common.utils.JSONUtils;
+import org..hcx.managers.HealthCheckManager;
 
 @Aspect
 @Component
@@ -24,7 +24,7 @@ public class HealthCheckAspect {
     @Autowired
     private HealthCheckManager healthCheckManager;
 
-    @Before("execution(* org.swasth.hcx.controllers.v1.*.*(..))")
+    @Before("execution(* org..hcx.controllers.v1.*.*(..))")
     public void healthCheckBeforeEachAPICall() throws JsonProcessingException, ServiceUnavailbleException {
         if (!HealthCheckManager.allSystemHealthResult) {
             Response healthResp = healthCheckManager.checkAllSystemHealth();

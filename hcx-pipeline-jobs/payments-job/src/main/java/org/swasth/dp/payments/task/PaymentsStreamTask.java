@@ -1,4 +1,4 @@
-package org.swasth.dp.payments.task;
+package org..dp.payments.task;
 
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
@@ -7,11 +7,11 @@ import org.apache.flink.api.java.utils.ParameterTool;
 import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.functions.source.SourceFunction;
-import org.swasth.dp.core.function.ContextEnrichmentFunction;
-import org.swasth.dp.core.job.BaseJobConfig;
-import org.swasth.dp.core.job.FlinkKafkaConnector;
-import org.swasth.dp.core.util.FlinkUtil;
-import org.swasth.dp.payments.functions.PaymentsProcessFunction;
+import org..dp.core.function.ContextEnrichmentFunction;
+import org..dp.core.job.BaseJobConfig;
+import org..dp.core.job.FlinkKafkaConnector;
+import org..dp.core.util.FlinkUtil;
+import org..dp.payments.functions.PaymentsProcessFunction;
 import scala.Option;
 import scala.Some;
 

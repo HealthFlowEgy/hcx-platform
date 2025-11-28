@@ -1,11 +1,11 @@
-package org.swasth.hcx.models;
+package org..hcx.models;
 
-import org.swasth.common.utils.SlugUtils;
+import org..common.utils.SlugUtils;
 
 import java.util.Map;
 
-import static org.swasth.common.utils.Constants.PARTICIPANT_CODE;
-import static org.swasth.common.utils.Constants.PRIMARY_EMAIL;
+import static org..common.utils.Constants.PARTICIPANT_CODE;
+import static org..common.utils.Constants.PRIMARY_EMAIL;
 
 public class Participant {
 

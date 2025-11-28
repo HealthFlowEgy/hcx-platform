@@ -1,6 +1,6 @@
-package org.swasth.common.dto;
+package org..common.dto;
 
-import org.swasth.common.exception.ErrorCodes;
+import org..common.exception.ErrorCodes;
 
 public class ResponseError {
     private ErrorCodes code;

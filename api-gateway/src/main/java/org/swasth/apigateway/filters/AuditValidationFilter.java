@@ -1,4 +1,4 @@
-package org.swasth.apigateway.filters;
+package org..apigateway.filters;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -7,14 +7,14 @@ import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.stereotype.Component;
-import org.swasth.apigateway.exception.ClientException;
-import org.swasth.apigateway.exception.ErrorCodes;
-import org.swasth.apigateway.handlers.ExceptionHandler;
-import org.swasth.apigateway.handlers.RequestHandler;
-import org.swasth.apigateway.models.BaseRequest;
-import org.swasth.apigateway.service.RegistryService;
-import org.swasth.common.utils.Constants;
-import org.swasth.common.utils.JSONUtils;
+import org..apigateway.exception.ClientException;
+import org..apigateway.exception.ErrorCodes;
+import org..apigateway.handlers.ExceptionHandler;
+import org..apigateway.handlers.RequestHandler;
+import org..apigateway.models.BaseRequest;
+import org..apigateway.service.RegistryService;
+import org..common.utils.Constants;
+import org..common.utils.JSONUtils;
 
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Map;
 
 import static org.springframework.cloud.gateway.support.ServerWebExchangeUtils.CACHED_REQUEST_BODY_ATTR;
-import static org.swasth.common.response.ResponseMessage.INVALID_SENDER;
+import static org..common.response.ResponseMessage.INVALID_SENDER;
 
 @Component
 public class AuditValidationFilter extends AbstractGatewayFilterFactory<AuditValidationFilter.Config> {

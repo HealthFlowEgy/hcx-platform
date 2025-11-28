@@ -84,9 +84,9 @@ redirect:
 
 #hcx config
 hcx:
-  instanceName: ${hcx_instance_name:swasth-hcx}
+  instanceName: ${hcx_instance_name:-hcx}
   urls:
-    notallowed: ${not_allowed_urls:http://dev-hcx.swasth.app/api,http://staging-hcx.swasth.app/api}
+    notallowed: ${not_allowed_urls:http://dev-hcx..app/api,http://staging-hcx..app/api}
 
 #Notifications related configurations
 notification:

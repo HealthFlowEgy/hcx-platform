@@ -1,7 +1,7 @@
-package org.swasth.dp.coverageeligiblity.task;
+package org..dp.coverageeligiblity.task;
 
 import com.typesafe.config.Config;
-import org.swasth.dp.core.job.BaseJobConfig;
+import org..dp.core.job.BaseJobConfig;
 
 public class CoverageEligibilityConfig extends BaseJobConfig {
 

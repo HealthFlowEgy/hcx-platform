@@ -1,4 +1,4 @@
-package org.swasth.common.dto;
+package org..common.dto;
 
 
 public class PagedRequest {

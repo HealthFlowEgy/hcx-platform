@@ -1,4 +1,4 @@
-package org.swasth.common.response;
+package org..common.response;
 
 import org.junit.Test;
 

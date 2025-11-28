@@ -1,10 +1,10 @@
-package org.swasth.dp.notification.functions;
+package org..dp.notification.functions;
 
 import org.apache.flink.streaming.api.functions.ProcessFunction;
 import org.apache.flink.util.Collector;
-import org.swasth.dp.core.util.Constants;
-import org.swasth.dp.core.util.JSONUtil;
-import org.swasth.dp.notification.task.NotificationConfig;
+import org..dp.core.util.Constants;
+import org..dp.core.util.JSONUtil;
+import org..dp.notification.task.NotificationConfig;
 
 import java.util.*;
 

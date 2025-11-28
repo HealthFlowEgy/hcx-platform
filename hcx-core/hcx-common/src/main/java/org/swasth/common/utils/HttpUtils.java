@@ -1,4 +1,4 @@
-package org.swasth.common.utils;
+package org..common.utils;
 
 import kong.unirest.HttpResponse;
 import kong.unirest.Unirest;

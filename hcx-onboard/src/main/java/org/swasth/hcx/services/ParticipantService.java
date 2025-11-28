@@ -1,4 +1,4 @@
-package org.swasth.hcx.services;
+package org..hcx.services;
 
 import kong.unirest.HttpResponse;
 import org.apache.commons.lang3.StringUtils;
@@ -10,18 +10,18 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.swasth.common.dto.OnboardRequest;
-import org.swasth.common.dto.OnboardResponse;
-import org.swasth.common.dto.ParticipantResponse;
-import org.swasth.common.dto.Response;
-import org.swasth.common.exception.ClientException;
-import org.swasth.common.exception.ErrorCodes;
-import org.swasth.common.exception.OTPVerificationException;
-import org.swasth.common.utils.HttpUtils;
-import org.swasth.common.utils.JSONUtils;
-import org.swasth.common.utils.JWTUtils;
-import org.swasth.hcx.controllers.BaseController;
-import org.swasth.postgresql.IDatabaseService;
+import org..common.dto.OnboardRequest;
+import org..common.dto.OnboardResponse;
+import org..common.dto.ParticipantResponse;
+import org..common.dto.Response;
+import org..common.exception.ClientException;
+import org..common.exception.ErrorCodes;
+import org..common.exception.OTPVerificationException;
+import org..common.utils.HttpUtils;
+import org..common.utils.JSONUtils;
+import org..common.utils.JWTUtils;
+import org..hcx.controllers.BaseController;
+import org..postgresql.IDatabaseService;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
@@ -30,8 +30,8 @@ import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.*;
 
-import static org.swasth.common.response.ResponseMessage.*;
-import static org.swasth.common.utils.Constants.*;
+import static org..common.response.ResponseMessage.*;
+import static org..common.utils.Constants.*;
 
 @Service
 public class ParticipantService extends BaseController {
@@ -118,7 +118,7 @@ public class ParticipantService extends BaseController {
     private void createParticipantAndSendOTP(HttpHeaders headers, OnboardRequest request, Map<String, Object> output) throws Exception {
         Map<String, Object> participant = request.getParticipant();
         participant.put(ENDPOINT_URL, "http://testurl/v0.7");
-        participant.put(ENCRYPTION_CERT, "https://raw.githubusercontent.com/Swasth-Digital-Health-Foundation/hcx-platform/sprint-27/hcx-apis/src/test/resources/examples/x509-self-signed-certificate.pem");
+        participant.put(ENCRYPTION_CERT, "https://raw.githubusercontent.com/-Digital-Health-Foundation/hcx-platform/sprint-27/hcx-apis/src/test/resources/examples/x509-self-signed-certificate.pem");
         participant.put(REGISTRY_STATUS, CREATED);
         if (((ArrayList<String>) participant.get(ROLES)).contains(PAYOR))
             participant.put(SCHEME_CODE, "default");

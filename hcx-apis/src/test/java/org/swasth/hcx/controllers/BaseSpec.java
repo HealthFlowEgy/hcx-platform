@@ -1,4 +1,4 @@
-package org.swasth.hcx.controllers;
+package org..hcx.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.elasticsearch.client.RestHighLevelClient;
@@ -15,24 +15,24 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
-import org.swasth.ICloudService;
-import org.swasth.auditindexer.function.AuditIndexer;
-import org.swasth.common.dto.Response;
-import org.swasth.common.helpers.EventGenerator;
-import org.swasth.common.service.RegistryService;
-import org.swasth.common.utils.Constants;
-import org.swasth.common.utils.JSONUtils;
-import org.swasth.common.utils.JWTUtils;
-import org.swasth.hcx.config.GenericConfiguration;
-import org.swasth.hcx.controllers.v1.*;
-import org.swasth.hcx.handlers.EventHandler;
-import org.swasth.hcx.managers.HealthCheckManager;
-import org.swasth.hcx.service.AuditService;
-import org.swasth.hcx.service.NotificationService;
-import org.swasth.hcx.service.ParticipantService;
-import org.swasth.kafka.client.IEventService;
-import org.swasth.postgresql.IDatabaseService;
-import org.swasth.redis.cache.RedisCache;
+import org..ICloudService;
+import org..auditindexer.function.AuditIndexer;
+import org..common.dto.Response;
+import org..common.helpers.EventGenerator;
+import org..common.service.RegistryService;
+import org..common.utils.Constants;
+import org..common.utils.JSONUtils;
+import org..common.utils.JWTUtils;
+import org..hcx.config.GenericConfiguration;
+import org..hcx.controllers.v1.*;
+import org..hcx.handlers.EventHandler;
+import org..hcx.managers.HealthCheckManager;
+import org..hcx.service.AuditService;
+import org..hcx.service.NotificationService;
+import org..hcx.service.ParticipantService;
+import org..kafka.client.IEventService;
+import org..postgresql.IDatabaseService;
+import org..redis.cache.RedisCache;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -389,7 +389,7 @@ public class BaseSpec {
     }
 
     public URL getUrl() throws MalformedURLException {
-        return new URL("https://raw.githubusercontent.com/Swasth-Digital-Health-Foundation/jwe-helper/main/src/test/resources/x509-self-signed-certificate.pem");
+        return new URL("https://raw.githubusercontent.com/-Digital-Health-Foundation/jwe-helper/main/src/test/resources/x509-self-signed-certificate.pem");
     }
 
     public String getAuthorizationHeader() {

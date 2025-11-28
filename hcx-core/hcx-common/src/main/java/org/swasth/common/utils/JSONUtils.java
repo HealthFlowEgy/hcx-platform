@@ -1,4 +1,4 @@
-package org.swasth.common.utils;
+package org..common.utils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

@@ -1,4 +1,4 @@
-package org.swasth.apigateway.service;
+package org..apigateway.service;
 
 import kong.unirest.HttpResponse;
 import kong.unirest.UnirestException;
@@ -7,20 +7,20 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.swasth.apigateway.exception.ErrorCodes;
-import org.swasth.apigateway.exception.ServerException;
-import org.swasth.apigateway.models.BaseRequest;
-import org.swasth.apigateway.utils.Utils;
-import org.swasth.auditindexer.function.AuditIndexer;
-import org.swasth.common.dto.Request;
-import org.swasth.common.helpers.EventGenerator;
-import org.swasth.common.utils.Constants;
-import org.swasth.common.utils.HttpUtils;
-import org.swasth.common.utils.JSONUtils;
-import org.swasth.common.utils.UUIDUtils;
+import org..apigateway.exception.ErrorCodes;
+import org..apigateway.exception.ServerException;
+import org..apigateway.models.BaseRequest;
+import org..apigateway.utils.Utils;
+import org..auditindexer.function.AuditIndexer;
+import org..common.dto.Request;
+import org..common.helpers.EventGenerator;
+import org..common.utils.Constants;
+import org..common.utils.HttpUtils;
+import org..common.utils.JSONUtils;
+import org..common.utils.UUIDUtils;
 
 import java.util.*;
-import static org.swasth.common.utils.Constants.*;
+import static org..common.utils.Constants.*;
 
 
 @Service

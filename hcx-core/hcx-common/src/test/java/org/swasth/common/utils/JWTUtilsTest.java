@@ -1,4 +1,4 @@
-package org.swasth.common.utils;
+package org..common.utils;
 
 import org.junit.Test;
 
@@ -11,12 +11,12 @@ public class JWTUtilsTest {
 
     @Test
     public void testGetCertificateExpiry() throws Exception {
-        assertNotNull(jwtUtils.getCertificateExpiry("https://raw.githubusercontent.com/Swasth-Digital-Health-Foundation/jwe-helper/main/src/test/resources/x509-self-signed-certificate.pem"));
+        assertNotNull(jwtUtils.getCertificateExpiry("https://raw.githubusercontent.com/-Digital-Health-Foundation/jwe-helper/main/src/test/resources/x509-self-signed-certificate.pem"));
     }
 
     @Test
     public void testIsValidSignature() throws Exception {
-        assertTrue(jwtUtils.isValidSignature(getNotificationPayload(), "https://raw.githubusercontent.com/Swasth-Digital-Health-Foundation/jwe-helper/main/src/test/resources/x509-self-signed-certificate.pem"));
+        assertTrue(jwtUtils.isValidSignature(getNotificationPayload(), "https://raw.githubusercontent.com/-Digital-Health-Foundation/jwe-helper/main/src/test/resources/x509-self-signed-certificate.pem"));
     }
 
     private String getNotificationPayload(){
@@ -31,6 +31,6 @@ public class JWTUtilsTest {
         String iss = "1-d2d56996-1b77-4abb-b9e9-0e6e7343c72e";
         Long expiryTime = Long.valueOf(86400000);
         String token = jwtUtils.generateAuthToken(privateKey,sub,iss,expiryTime);
-        assertTrue(jwtUtils.isValidSignature(token,"https://raw.githubusercontent.com/Swasth-Digital-Health-Foundation/hcx-platform/sprint-30/hcx-apis/src/test/resources/examples/test-keys/public-key.pem"));
+        assertTrue(jwtUtils.isValidSignature(token,"https://raw.githubusercontent.com/-Digital-Health-Foundation/hcx-platform/sprint-30/hcx-apis/src/test/resources/examples/test-keys/public-key.pem"));
     }
 }

@@ -1,4 +1,4 @@
-package org.swasth.apigateway.utils;
+package org..apigateway.utils;
 
 import lombok.experimental.UtilityClass;
 import org.springframework.util.AntPathMatcher;

@@ -1,9 +1,9 @@
-package org.swasth.hcx.config;
+package org..hcx.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.swasth.auditindexer.function.AuditIndexer;
+import org..auditindexer.function.AuditIndexer;
 
 @Configuration
 public class AuditIndexerConfiguration {

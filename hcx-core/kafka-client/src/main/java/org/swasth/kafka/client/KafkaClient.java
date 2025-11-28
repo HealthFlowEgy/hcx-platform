@@ -1,12 +1,12 @@
-package org.swasth.kafka.client;
+package org..kafka.client;
 
 import org.apache.kafka.clients.admin.AdminClient;
 import org.apache.kafka.clients.admin.ListTopicsOptions;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.errors.TimeoutException;
-import org.swasth.common.exception.ErrorCodes;
-import org.swasth.common.exception.ServerException;
+import org..common.exception.ErrorCodes;
+import org..common.exception.ServerException;
 
 import java.util.Properties;
 import java.util.concurrent.ExecutionException;
